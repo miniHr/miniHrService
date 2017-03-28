@@ -12,26 +12,47 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.miniHr.entity.Company;
+import com.miniHr.service.impl.ApplicantServiceImpl;
 import com.miniHr.service.impl.CompanyServiceImpl;
 
 @SpringBootApplication
 @RestController
 public class MiniHrServiceApplication {
 
-    private static Logger log = LoggerFactory.getLogger(MiniHrServiceApplication.class);
+	private static Logger log = LoggerFactory.getLogger(MiniHrServiceApplication.class);
 
-    @Autowired
-    private CompanyServiceImpl companyServiceImpl;
+	@Autowired
+	private CompanyServiceImpl companyServiceImpl;
 
-    @RequestMapping(value = "/query/{type}")
-    public List<Company> queryJob(@PathVariable String type) {
-        log.info("接收到请求！！");
-        Company company = new Company();
-        company.setType(type);
-        return companyServiceImpl.findByType(company);
-    }
+	@Autowired
+	private ApplicantServiceImpl applicantServiceImpl;
 
-    public static void main(String[] args) {
-        SpringApplication.run(MiniHrServiceApplication.class, args);
-    }
+	@RequestMapping(value = "/query/{type}")
+	public List<Company> queryJob(@PathVariable String type) {
+		log.info("接收到应聘者请求！！");
+		Company company = new Company();
+		company.setType(type);
+		return companyServiceImpl.findByType(company);
+	}
+
+	@RequestMapping("/count")
+	public List<String> countJob() {
+		log.info("接收到企业者请求！！");
+		List<String> list = applicantServiceImpl.statistics();
+		while (list.size() < 5) {
+			list.add("0");
+		}
+		return list;
+	}
+
+	@RequestMapping("/insert/{type}")
+	public String insert(@PathVariable String type) {
+		log.info("有一个人对" + type + "感兴趣");
+		applicantServiceImpl.insert(type);
+		return "Success";
+	}
+
+	public static void main(String[] args) {
+		SpringApplication.run(MiniHrServiceApplication.class, args);
+	}
 }
