@@ -11,16 +11,16 @@ import com.miniHr.service.ApplicantService;
 @Service
 public class ApplicantServiceImpl implements ApplicantService {
 
-	@Autowired
-	private JdbcTemplate jdbcTemplate;
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
 
-	@Override
-	public void insert(String type) {
-		jdbcTemplate.update("insert into applicant(type) values(?)", type);
-	}
+    @Override
+    public void insert(String type) {
+        jdbcTemplate.update("update applicant set count=count+1 where type=?", type);
+    }
 
-	@Override
-	public List<String> statistics() {
-		return jdbcTemplate.queryForList("select count(type) from applicant group by type",String.class);
-	}
+    @Override
+    public List<String> statistics() {
+        return jdbcTemplate.queryForList("select count from applicant group by type", String.class);
+    }
 }
