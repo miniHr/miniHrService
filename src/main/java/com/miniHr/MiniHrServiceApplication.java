@@ -39,9 +39,6 @@ public class MiniHrServiceApplication {
 	public List<String> countJob() {
 		log.info("接收到企业者请求！！");
 		List<String> list = applicantServiceImpl.statistics();
-		while (list.size() < 5) {
-			list.add("0");
-		}
 		return list;
 	}
 

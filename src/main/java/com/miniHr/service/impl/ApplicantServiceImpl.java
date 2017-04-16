@@ -16,7 +16,7 @@ public class ApplicantServiceImpl implements ApplicantService {
 
     @Override
     public void insert(String type) {
-        jdbcTemplate.update("update applicant set count=count+1 where type=?", type);
+        jdbcTemplate.update("update applicant set count=count+1 where type=?",Integer.parseInt(type));
     }
 
     @Override
