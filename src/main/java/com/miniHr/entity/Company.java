@@ -7,8 +7,9 @@ public class Company {
 	private String job;
 	private String position;
 	private String type;
+	private String image;
 
-	public Integer getId() {
+    public Integer getId() {
 		return id;
 	}
 
@@ -47,6 +48,14 @@ public class Company {
 	public void setType(String type) {
 		this.type = type;
 	}
+	
+	public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
 
 	@Override
 	public String toString() {

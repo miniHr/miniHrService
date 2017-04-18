@@ -41,6 +41,7 @@ public class CompanyServiceImpl implements CompanyService {
 						com.setJob(arg0.getString("job"));
 						com.setPosition(arg0.getString("position"));
 						com.setType(arg0.getString("type"));
+						com.setImage(arg0.getString("image"));
 						return com;
 					}
 				});
