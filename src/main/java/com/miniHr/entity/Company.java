@@ -5,7 +5,7 @@ public class Company {
 	private Integer id;
 	private String name;
 	private String job;
-	private String position;
+	private Integer position;
 	private String type;
 	private String image;
 
@@ -33,11 +33,11 @@ public class Company {
 		this.job = job;
 	}
 
-	public String getPosition() {
+	public Integer getPosition() {
 		return position;
 	}
 
-	public void setPosition(String position) {
+	public void setPosition(Integer position) {
 		this.position = position;
 	}
 

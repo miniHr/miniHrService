@@ -31,7 +31,7 @@ public class CompanyServiceImpl implements CompanyService {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Company> findByType(Company company) {
-		return (List<Company>) jdbcTemplate.query("select * from company where type = ?",
+		return (List<Company>) jdbcTemplate.query("select * from company where type = ? order by position",
 				new Object[] { company.getType() }, new int[] { java.sql.Types.VARCHAR }, new RowMapper() {
 					@Override
 					public Object mapRow(ResultSet arg0, int arg1) throws SQLException {
@@ -39,7 +39,7 @@ public class CompanyServiceImpl implements CompanyService {
 						com.setId(arg0.getInt("id"));
 						com.setName(arg0.getString("name"));
 						com.setJob(arg0.getString("job"));
-						com.setPosition(arg0.getString("position"));
+						com.setPosition(arg0.getInt("position"));
 						com.setType(arg0.getString("type"));
 						com.setImage(arg0.getString("image"));
 						return com;
