@@ -4,7 +4,7 @@
 
 	<groupId>com.miniHr</groupId>
 	<artifactId>miniHrService</artifactId>
-	<version>1.0.0</version>
+	<version>1.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<name>miniHrService</name>
