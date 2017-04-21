@@ -56,8 +56,10 @@
 			</plugin>
 		</plugins>
 	</build>
-	 <scm>
-		<developerConnection>scm:git:https://github.com/miniHr/miniHrService.git</developerConnection>
-		<tag>HEAD</tag>
-	</scm>
+	<repositories>
+		<repository>
+			<id>spring-milestone</id>
+			<url>http://repo.spring.io/libs-release</url>
+		</repository>
+	</repositories>
 </project>
