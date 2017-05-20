@@ -2,6 +2,8 @@ package com.miniHr;
 
 import java.util.List;
 
+import com.miniHr.service.ApplicantService;
+import com.miniHr.service.CompanyService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,17 +17,17 @@ import com.miniHr.entity.Company;
 import com.miniHr.service.impl.ApplicantServiceImpl;
 import com.miniHr.service.impl.CompanyServiceImpl;
 
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = {"com.miniHr.service"})
 @RestController
 public class MiniHrServiceApplication {
 
 	private static Logger log = LoggerFactory.getLogger(MiniHrServiceApplication.class);
 
 	@Autowired
-	private CompanyServiceImpl companyServiceImpl;
+	private CompanyService companyServiceImpl;
 
 	@Autowired
-	private ApplicantServiceImpl applicantServiceImpl;
+	private ApplicantService applicantServiceImpl;
 
 	@RequestMapping(value = "/query/{type}")
 	public List<Company> queryJob(@PathVariable String type) {
