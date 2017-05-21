@@ -45,7 +45,7 @@
 		<appender-ref ref="sqlFile" />
 	</logger>
 	<logger name="jdbc.connection" level="OFF"></logger>
-	<logger name="jdbc.sqlonly" level="OFF"></logger>
+	<logger name="jdbc.sqlonly" level="INFO"></logger>
 	<logger name="jdbc.audit" level="OFF"></logger>
 	<logger name="jdbc.resultset" level="OFF"></logger>
 	<logger name="jdbc.resultsettable" level="OFF" />
