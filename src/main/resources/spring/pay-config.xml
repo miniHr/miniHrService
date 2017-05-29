@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	default-autowire="byName"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd">
+	   
+	<bean id="defaultPropertyPlaceholderConfigurer"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="ignoreUnresolvablePlaceholders" value="true" />
+		<property name="location">
+			<value>classpath:pay.properties</value>
+		</property>
+		<property name="order" value="2" />
+	</bean>
+	<bean id="customPropertyPlaceholderConfigurer"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="ignoreUnresolvablePlaceholders" value="true" />
+		<property name="locations">
+			<list>
+				<value>file:/app/config/pay.properties</value>
+			</list>
+		</property>
+		<property name="order" value="1" />
+	</bean>
+	
+	<bean id="payRequest" class="com.miniHr.entity.PayRequest" scope="prototype">
+		<property name="appId" value="${appId}"/>
+		<property name="attach" value="${attach}"/>
+		<property name="detail" value="{detail}"/>
+		<property name="deviceInfo" value="${deviceInfo}"/>
+		<property name="feeType" value="${feeType}"/>
+		<property name="goodsTag" value="${goodsTag}"/>
+		<property name="limitPay" value="${limitPay}"/>
+		<property name="mchtId" value="${mchtId}"/>
+		<property name="notifyUrl" value="${notifyUrl}"/>
+		<property name="openId" value="${openId}"/>
+		<property name="productId" value="${productId}"/>
+		<property name="spbillCreateIp" value="${spbillCreateIp}"/>
+		<property name="timeExpire" value="${timeExpire}"/>
+		<property name="timeStart" value="${timeStart}"/>
+		<property name="tradeType" value="${tradeType}"/>
+	</bean>
+</beans>

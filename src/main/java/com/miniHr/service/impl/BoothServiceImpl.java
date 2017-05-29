@@ -20,4 +20,12 @@ public class BoothServiceImpl implements BoothService {
 		return boothDao.queryAllBooth();
 	}
 
+	@Override
+	public Booth getBoothById(Integer id) {
+		return boothDao.getBoothById(id);
+	}
+	
+	public int updateBoothInfo(Booth booth){
+		return boothDao.updateBoothInfo(booth);
+	}
 }

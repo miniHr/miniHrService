@@ -1,6 +1,8 @@
 package com.miniHr.dao.impl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
@@ -28,6 +30,13 @@ public class BoothDaoImpl implements BoothDao {
 		return template.update(sql, new BeanPropertySqlParameterSource(booth));
 	}
 
+	@Override
+	public Booth getBoothById(Integer id) {
+		String sql = "SELECT * FROM BOOTH_INFO WHERE ID=:id";
+		Map<String,String> paramMap = new HashMap<String,String>();
+		paramMap.put("id", id.toString());
+		return template.queryForObject(sql, paramMap, CustomerRowMapper.newInstance(Booth.class));
+	}
 	public NamedParameterJdbcTemplate getTemplate() {
 		return template;
 	}
