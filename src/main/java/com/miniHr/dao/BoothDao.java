@@ -13,6 +13,7 @@ public interface BoothDao {
 	/**根据展位id更新展位信息*/
 	public int updateBoothInfo(Booth booth);
 	
+	/**根据id查询展位信息*/
 	public Booth getBoothById(Integer id);
 	
 	/**根据原展位状态更新展位状态*/
