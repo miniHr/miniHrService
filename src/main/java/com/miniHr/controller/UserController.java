@@ -13,8 +13,8 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 	
-	@RequestMapping("/user/query/{openId}")
-	public User queryById(@PathVariable String openId){
+	@RequestMapping("/user/query")
+	public User queryById(String openId){
 		User user = new User();
 		user.setOpenId(openId);
 		return userService.getUserById(user);
