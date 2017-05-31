@@ -74,12 +74,12 @@ public class JsonUtil {
 
 	}
 
-	public static void main(String args[]) {
-		System.out.println(toJson(null));
-		System.out.println(fromJson("null", Object.class));
-		Map<String, String> a = new HashMap<String, String>();
-		a.put("fd", "ab8&jfdk%jk$..>fd<.,jfkdjf==fkdjf");
-		System.out.println(toJson(a));
-		System.out.println(toJson(a, true));
-	}
+//	public static void main(String args[]) {
+//		System.out.println(toJson(null));
+//		System.out.println(fromJson("null", Object.class));
+//		Map<String, String> a = new HashMap<String, String>();
+//		a.put("fd", "ab8&jfdk%jk$..>fd<.,jfkdjf==fkdjf");
+//		System.out.println(toJson(a));
+//		System.out.println(toJson(a, true));
+//	}
 }

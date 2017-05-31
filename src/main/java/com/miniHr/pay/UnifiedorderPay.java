@@ -124,12 +124,12 @@ public class UnifiedorderPay {
 		return redirectParamsMap;
 	}
 	
-	public static void main(String[] args) {
-		Map<String,String> map=new HashMap<String,String>();
-		map.put("amount", "1");
-		map.put("boothid", "15");
-		map.put("openid", "oCeMZ0WUojqOrmtZOA0f1-8qvJg0");
-		System.out.println(WechatPay(map));
-		
-	}
+//	public static void main(String[] args) {
+//		Map<String,String> map=new HashMap<String,String>();
+//		map.put("amount", "1");
+//		map.put("boothid", "15");
+//		map.put("openid", "oCeMZ0WUojqOrmtZOA0f1-8qvJg0");
+//		System.out.println(WechatPay(map));
+//		
+//	}
 }
