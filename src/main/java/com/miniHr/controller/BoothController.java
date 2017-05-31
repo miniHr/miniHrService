@@ -58,8 +58,8 @@ public class BoothController {
 		return UnifiedorderPay.WechatPay(map);
 	}
 	
-	@RequestMapping("/booth/payCompletly")
-	public Booth completePay(Integer boothId,Integer companyId) throws Exception{
+	@RequestMapping("/booth/payCompletly/{boothId}/{companyId}")
+	public Booth completePay(@PathVariable Integer boothId,@PathVariable Integer companyId) throws Exception{
 		Booth booth = boothService.getBoothById(boothId);
 		if(BoothState.Saled.getState().equals(booth.getState()))
 			throw new Exception("该展位已被购买");
