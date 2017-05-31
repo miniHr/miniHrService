@@ -11,6 +11,8 @@ import java.util.Date;
 public class User implements Serializable {
 	private static final long serialVersionUID = -8318206390113272633L;
 	private Integer id; // 用户id
+	private String openId;// openId
+	private String sex;// 性别
 	private String name; // 用户姓名
 	private String phone; // 电话号码
 	private Integer age; // 年龄
@@ -39,6 +41,22 @@ public class User implements Serializable {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getOpenId() {
+		return openId;
+	}
+
+	public void setOpenId(String openId) {
+		this.openId = openId;
+	}
+
+	public String getSex() {
+		return sex;
+	}
+
+	public void setSex(String sex) {
+		this.sex = sex;
 	}
 
 	public String getPhone() {

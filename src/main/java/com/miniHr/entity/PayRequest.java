@@ -7,22 +7,22 @@ package com.miniHr.entity;
 public class PayRequest {
 	private String appId;
 	private String mchtId;
-	private String deviceInfo;
+	private String deviceInfo = "";
 	private String nonceStr;
 	private String signType = "MD5";
 	private String body;
-	private String detail;
-	private String attach;
+	private String detail = "";
+	private String attach = "";
 	private String outTraceNo;
 	private String feeType = "CNY";
 	private String totalFee = "";
 	private String spbillCreateIp = "127.0.0.1";
-	private String timeStart;
-	private String timeExpire;
-	private String goodsTag;
+	private String timeStart="";
+	private String timeExpire="";
+	private String goodsTag = "";
 	private String notifyUrl;
 	private String tradeType = "JSAPI";
-	private String productId;
+	private String productId = "";
 	private String limitPay = "no_credit";
 	private String openId;
 	private String sign;
@@ -151,5 +151,14 @@ public class PayRequest {
 	}
 	public void setSign(String sign) {
 		this.sign = sign;
+	}
+	
+	public String toString(){
+		StringBuffer info = new StringBuffer();
+		info.append("订单金额:").append(totalFee).append("\n")
+			.append("通知地址：").append(notifyUrl).append("\n")
+			.append("流水号：" + outTraceNo).append("\n")
+			.append("签名：").append(sign);
+		return info.toString();
 	}
 }

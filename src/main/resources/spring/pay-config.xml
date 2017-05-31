@@ -13,8 +13,9 @@
 		<property name="location">
 			<value>classpath:pay.properties</value>
 		</property>
-		<property name="order" value="2" />
+		<property name="order" value="1" />
 	</bean>
+	<!-- 
 	<bean id="customPropertyPlaceholderConfigurer"
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<property name="ignoreUnresolvablePlaceholders" value="true" />
@@ -24,23 +25,14 @@
 			</list>
 		</property>
 		<property name="order" value="1" />
-	</bean>
+	</bean> -->
 	
 	<bean id="payRequest" class="com.miniHr.entity.PayRequest" scope="prototype">
 		<property name="appId" value="${appId}"/>
-		<property name="attach" value="${attach}"/>
-		<property name="detail" value="{detail}"/>
-		<property name="deviceInfo" value="${deviceInfo}"/>
 		<property name="feeType" value="${feeType}"/>
-		<property name="goodsTag" value="${goodsTag}"/>
-		<property name="limitPay" value="${limitPay}"/>
 		<property name="mchtId" value="${mchtId}"/>
 		<property name="notifyUrl" value="${notifyUrl}"/>
-		<property name="openId" value="${openId}"/>
-		<property name="productId" value="${productId}"/>
 		<property name="spbillCreateIp" value="${spbillCreateIp}"/>
-		<property name="timeExpire" value="${timeExpire}"/>
-		<property name="timeStart" value="${timeStart}"/>
 		<property name="tradeType" value="${tradeType}"/>
 	</bean>
 </beans>

@@ -9,15 +9,14 @@ import com.miniHr.entity.User;
 import com.miniHr.service.UserService;
 
 @RestController
-@RequestMapping("/user")
 public class UserController {
 	@Autowired
 	private UserService userService;
 	
-	@RequestMapping("/query/{userId}")
-	public User queryById(@PathVariable Integer userId){
+	@RequestMapping("/user/query/{openId}")
+	public User queryById(@PathVariable String openId){
 		User user = new User();
-		user.setId(userId);
+		user.setOpenId(openId);
 		return userService.getUserById(user);
 	}
 	

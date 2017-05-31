@@ -6,6 +6,7 @@ import java.util.SortedMap;
 import java.util.TreeMap;
 
 import org.apache.commons.beanutils.BeanMap;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.miniHr.entity.PayRequest;
@@ -17,8 +18,11 @@ import com.miniHr.util.StringUtil;
 
 @Service(value="payService")
 public class PayServiceImpl implements PayService {
+	
+	@Value("${key}")
 	private String key;
 	
+	@Value("${transUrl}")
 	private String transUrl;
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
@@ -43,7 +47,7 @@ public class PayServiceImpl implements PayService {
 		redirectParams.put("nonceStr", UnifiedorderPay.getRandStr());
 		redirectParams.put("package", "prepay_id=" + prePayId);
 		redirectParams.put("signType", "MD5");
-		redirectParams.put("paySign",WechatSecurity.sign(redirectParams,key));
+		redirectParams.put("paySign",WechatSecurity.sign(redirectParams,StringUtil.isEmpty(getKey())?"":key));
 		return redirectParams;
 	}
 
@@ -52,7 +56,7 @@ public class PayServiceImpl implements PayService {
 		xmlRes = StringUtil.deleteCdata(xmlRes);
 		String retCode=StringUtil.getTagValue(xmlRes, "return_code");//通讯状态
 		
-		if("SUCCESS".equals(retCode) && WechatSecurity.verify(xmlRes, key)){
+		if("SUCCESS".equals(retCode) && WechatSecurity.verify(xmlRes, StringUtil.isEmpty(getKey())?"":key)){
 			retCode=StringUtil.getTagValue(xmlRes,"result_code");//业务状态
 			if("SUCCESS".equals(retCode)){
 				retCode="00";
@@ -62,6 +66,22 @@ public class PayServiceImpl implements PayService {
 			}
 		}
 		return "";
+	}
+
+	public String getKey() {
+		return key;
+	}
+
+	public void setKey(String key) {
+		this.key = key;
+	}
+
+	public String getTransUrl() {
+		return transUrl;
+	}
+
+	public void setTransUrl(String transUrl) {
+		this.transUrl = transUrl;
 	}
 
 }

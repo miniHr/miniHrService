@@ -1,5 +1,6 @@
 package com.miniHr.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -12,11 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.miniHr.entity.Booth;
 import com.miniHr.entity.BoothState;
-import com.miniHr.entity.PayRequest;
 import com.miniHr.pay.UnifiedorderPay;
 import com.miniHr.service.BoothService;
-import com.miniHr.service.PayService;
-import com.miniHr.util.DateUtil;
 import com.miniHr.util.StringUtil;
 
 @RestController
@@ -25,11 +23,6 @@ public class BoothController {
 	
 	@Autowired
 	private BoothService boothSerivce;
-	@Autowired
-	private PayService pay;
-	
-	@Autowired
-	private PayRequest request;
 	
 	@RequestMapping("/booth/query")
 	public List<Booth> getAllBoothInfo(){
@@ -38,7 +31,7 @@ public class BoothController {
 	}
 	
 	@RequestMapping("/booth/pay")
-	public Map<String,String> perChaseBooth(String boothId,String openId,String body) 
+	public Map<String,Object> perChaseBooth(String boothId,String openId,String amount) 
 			throws Exception{
 		log.info("构造支付报文");
 		if(StringUtil.isEmpty(openId) || StringUtil.isEmpty(openId))
@@ -51,11 +44,11 @@ public class BoothController {
 		booth.setState(BoothState.Saling.getState());
 		boothSerivce.updateBoothInfo(booth);
 		
-		request.setBody("支付展位" + boothId);
-		request.setNonceStr(UnifiedorderPay.getRandStr());
-		request.setTotalFee(booth.getPrice() + "");
-		request.setOutTraceNo(DateUtil.formatCurrDateTime(DateUtil.DF_YMDHMS) + openId.substring(0,10));
-		return pay.pay(request);
+		Map<String,String> map=new HashMap<String,String>();
+		map.put("amount", amount);
+		map.put("boothid", boothId);
+		map.put("openid", openId);
+		return UnifiedorderPay.WechatPay(map);
 	}
 	
 	@RequestMapping("/booth/payCompletly/{companyId}")
