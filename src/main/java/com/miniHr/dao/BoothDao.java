@@ -3,6 +3,7 @@ package com.miniHr.dao;
 import java.util.List;
 
 import com.miniHr.entity.Booth;
+import com.miniHr.vo.BoothVo;
 
 public interface BoothDao {
 	
@@ -13,4 +14,7 @@ public interface BoothDao {
 	public int updateBoothInfo(Booth booth);
 	
 	public Booth getBoothById(Integer id);
+	
+	/**根据原展位状态更新展位状态*/
+	public int updateBoothInfoWithState(BoothVo vo);
 }

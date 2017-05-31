@@ -17,7 +17,7 @@ import com.miniHr.util.StringUtil;
 public class UnifiedorderPay {
 	public static final String appid="wxe79c9076ceb26a59";
 	public static final String mchtId="1466649802";
-	public static final String key="";
+	public static final String key="66666666666666668888888888888888";
 	public static final String reqUrl = "https://api.mch.weixin.qq.com/pay/unifiedorder";
 	public static final String base = "abcdefghijklmnopqrstuvwxyz0123456789"; 
 	/**

@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 import com.miniHr.dao.BoothDao;
 import com.miniHr.dao.CustomerRowMapper;
 import com.miniHr.entity.Booth;
+import com.miniHr.vo.BoothVo;
 
 @Repository("boothDao")
 public class BoothDaoImpl implements BoothDao {
@@ -43,6 +44,12 @@ public class BoothDaoImpl implements BoothDao {
 
 	public void setTemplate(NamedParameterJdbcTemplate template) {
 		this.template = template;
+	}
+
+	@Override
+	public int updateBoothInfoWithState(BoothVo vo) {
+		String sql = "UPDATE BOOTH_INFO SET STATE=:state,COMPANY_ID=:companyId,update_dt=current_timestamp where ID=:id AND STATE=:oriState";
+		return template.update(sql, new BeanPropertySqlParameterSource(vo));
 	}
 	
 }
