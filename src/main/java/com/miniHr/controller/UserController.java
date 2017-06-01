@@ -22,7 +22,7 @@ public class UserController {
 		try{
 			return userService.getUserById(user);
 		}catch (Exception e){
-			log.info("查询用户异常：",e);
+			log.info("查询用户异常：" + e);
 		}
 		return null;
 	}
