@@ -8,7 +8,7 @@ public interface CompanyDao {
 	/**
 	 * 新增企业
 	 */
-	void addCompany(Company company);
+	int addCompany(Company company);
 	
 	/**
 	 * 根据类型查找企业

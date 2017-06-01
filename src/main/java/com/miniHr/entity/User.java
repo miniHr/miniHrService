@@ -20,7 +20,7 @@ public class User implements Serializable {
 	private Integer workTime;// 工龄
 	private String education;// 学历
 	private String major; // 专业
-	private Integer level; // 用户等级 1普通用户 2企业用户
+	private String level; // 用户等级 1普通用户 2企业用户
 	private Integer companyId; // 公司id
 	private Date createDt;
 	private String creater;
@@ -107,11 +107,11 @@ public class User implements Serializable {
 		this.major = major;
 	}
 
-	public Integer getLevel() {
+	public String getLevel() {
 		return level;
 	}
 
-	public void setLevel(Integer level) {
+	public void setLevel(String level) {
 		this.level = level;
 	}
 
