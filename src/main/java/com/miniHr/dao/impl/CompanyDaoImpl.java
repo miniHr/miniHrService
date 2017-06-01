@@ -17,9 +17,9 @@ public class CompanyDaoImpl implements CompanyDao {
 	private NamedParameterJdbcTemplate template;
 	
 	@Override
-	public void addCompany(Company company) {
+	public int addCompany(Company company) {
 		String sql = "insert into company(name, job,position,type) values(:name,:job,:position,:type)";
-		template.update(sql, new BeanPropertySqlParameterSource(company));
+		return template.update(sql, new BeanPropertySqlParameterSource(company));
 	}
 
 	@Override
@@ -27,7 +27,7 @@ public class CompanyDaoImpl implements CompanyDao {
 		String sql = "select * from company where type=:type";
 		
 		Company company = new Company();
-		company.setType(type);
+//		company.setType(type);
 		return template.queryForList(sql, new BeanPropertySqlParameterSource(company), Company.class);
 	}
 

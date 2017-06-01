@@ -2,10 +2,12 @@ package com.miniHr.controller;
 
 import java.util.List;
 
+import com.miniHr.entity.CompanyExt;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,12 +21,18 @@ public class CompanyController {
 	@Autowired
 	private CompanyService companyServiceImpl;
 	
-	@RequestMapping(value = "/query/{type}")
+	@RequestMapping(value = "/company/query/{type}")
 	public List<Company> queryJob(@PathVariable String type) {
 		log.info("接收到应聘者请求！！");
 		Company company = new Company();
-		company.setType(type);
+//		company.setType(type);
 		return companyServiceImpl.findByType(company);
+	}
+
+	@PostMapping(value = "/company/insert")
+	public String addCompanyInfo(CompanyExt companyExt){
+		boolean reuslt = companyServiceImpl.insert(companyExt);
+		return reuslt == true ? "00" : "01";
 	}
 	
 }
