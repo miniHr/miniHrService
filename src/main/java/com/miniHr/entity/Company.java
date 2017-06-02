@@ -1,7 +1,10 @@
 package com.miniHr.entity;
 
+import com.sun.xml.internal.ws.developer.Serialization;
+
 import java.util.Date;
 
+@Serialization
 public class Company {
 
 	private Integer id;

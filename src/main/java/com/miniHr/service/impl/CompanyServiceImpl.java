@@ -49,6 +49,11 @@ public class CompanyServiceImpl implements CompanyService {
 		return null;
 	}
 
+	/**
+	 * 添加一个企业信息
+	 * @param companyExt
+	 * @return
+     */
 	@Override
 	@Transactional
 	public boolean insert(CompanyExt companyExt) {
@@ -57,6 +62,16 @@ public class CompanyServiceImpl implements CompanyService {
 		user.setLevel(UserLevel.COMPANY.getLevel());
 		userdaoImpl.addUser(user);
 
-		return companyDaoImpl.addCompany((Company)companyExt) > 0;
+		return companyDaoImpl.addCompany(companyExt) > 0;
+	}
+
+	/**
+	 * 查询企业信息
+	 * @param id
+	 * @return
+     */
+	@Override
+	public Company selectCompanyInfo(int id) {
+		return companyDaoImpl.selectCompanyInfoById(id);
 	}
 }

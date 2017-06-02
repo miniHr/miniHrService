@@ -38,4 +38,11 @@ public interface CompanyService {
      * @return
      */
     boolean insert(CompanyExt companyExt);
+
+    /**
+     * 查询企业信息
+     * @param id
+     * @return
+     */
+    Company selectCompanyInfo(int id);
 }

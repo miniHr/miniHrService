@@ -20,4 +20,11 @@ public interface CompanyDao {
 	 */
 	
 	void deleteById(int id);
+
+	/**
+	 * 根据id查询企业信息
+	 * @param id
+     * @return
+     */
+	Company selectCompanyInfoById(int id);
 }

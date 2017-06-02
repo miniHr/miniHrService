@@ -40,4 +40,18 @@ public class CompanyDaoImpl implements CompanyDao {
 		template.update(sql, new BeanPropertySqlParameterSource(company));
 	}
 
+	/**
+	 * 根据id查询企业信息
+	 *
+	 * @param id
+	 * @return
+	 */
+	@Override
+	public Company selectCompanyInfoById(int id) {
+		String sql = "select * from company where id=:id";
+		Company company = new Company();
+		company.setId(id);
+		return template.queryForList(sql, new BeanPropertySqlParameterSource(company), Company.class).get(0);
+	}
+
 }
