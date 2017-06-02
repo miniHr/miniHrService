@@ -32,9 +32,9 @@ public class CompanyController {
 
 	@GetMapping(value = "/insert")
 	public String addCompanyInfo(CompanyExt companyExt) {
-		boolean reuslt = companyServiceImpl.insert(companyExt);
+		boolean result = companyServiceImpl.insert(companyExt);
 		Map<String,Object> retMap = new HashMap<String,Object>();
-		retMap.put("retCode",reuslt == true ? "00" : "01");
+		retMap.put("retCode",result == true ? "00" : "01");
 		return JsonUtil.toJson(retMap);
 	}
 
