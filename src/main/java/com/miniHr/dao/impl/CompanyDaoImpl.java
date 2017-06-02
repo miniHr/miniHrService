@@ -18,7 +18,8 @@ public class CompanyDaoImpl implements CompanyDao {
 	
 	@Override
 	public int addCompany(Company company) {
-		String sql = "insert into company(name, job,position,type) values(:name,:job,:position,:type)";
+//		String sql = "insert into company(name, job,position,type) values(:name,:job,:position,:type)";
+		String sql = "insert into COMPANY_INFO(COMPANY_NAME, IMAGE,SCALE,ADDRESS,WELFARE,NAME,PHONE,BOOTH_ID,CREATE_DT,CREATER,UPDATE_DT,UPDATER) values(:companyName,:image,:scale,:address,:welfare,:name,:phone,:boothId,sysdate(),'creater',sysdate(),'updater')";
 		return template.update(sql, new BeanPropertySqlParameterSource(company));
 	}
 
