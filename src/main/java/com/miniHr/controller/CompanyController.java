@@ -1,8 +1,11 @@
 package com.miniHr.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.miniHr.entity.CompanyExt;
+import com.miniHr.util.JsonUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,15 +30,21 @@ public class CompanyController {
 		return companyServiceImpl.findByType(company);
 	}
 
-	@PostMapping(value = "/insert")
-	public String addCompanyInfo(CompanyExt companyExt){
+	@GetMapping(value = "/insert")
+	public String addCompanyInfo(CompanyExt companyExt) {
 		boolean reuslt = companyServiceImpl.insert(companyExt);
-		return reuslt == true ? "00" : "01";
+		Map<String,Object> retMap = new HashMap<String,Object>();
+		retMap.put("retCode",reuslt == true ? "00" : "01");
+		return JsonUtil.toJson(retMap);
 	}
 
 	@GetMapping(value = "/query/{id}")
-	public Company queryCompanyInfo(@PathVariable int id){
-		return companyServiceImpl.selectCompanyInfo(id);
+	public String queryCompanyInfo(@PathVariable int id){
+		Company company = companyServiceImpl.selectCompanyInfo(id);
+		Map<String,Object> retMap = new HashMap<String,Object>();
+		retMap.put("retCode", company == null ? "01" : "00");
+		retMap.put("retData", company);
+		return JsonUtil.toJson(retMap);
 	}
 	
 }

@@ -1,11 +1,10 @@
 package com.miniHr.entity;
 
-import com.sun.xml.internal.ws.developer.Serialization;
 
+import java.io.Serializable;
 import java.util.Date;
 
-@Serialization
-public class Company {
+public class Company implements Serializable {
 
 	private Integer id;
 	private String companyName;
