@@ -2,11 +2,13 @@ package com.miniHr.entity;
 
 /**
  * 用户等级
- * 1、普通用户，2、企业用户
+ * 1、个人，2、已付费企业用户, 3、未付费企业用户
  * @author Jacco
  */
 public enum UserLevel {
-	COMMON("1"),COMPANY("2");
+	INDIVIDUAL("1"),
+	PAYED_COMPANY_USER("2"),
+	UNPAYED_COMPANY_USER("3");
 	String level;
 
 	UserLevel(String level){

@@ -59,7 +59,7 @@ public class CompanyServiceImpl implements CompanyService {
 	public boolean insert(CompanyExt companyExt) {
 		User user = new User();
 		user.setOpenId(companyExt.getOpenId());
-		user.setLevel(UserLevel.COMPANY.getLevel());
+		user.setLevel(UserLevel.UNPAYED_COMPANY_USER.getLevel());
 		userdaoImpl.addUser(user);
 
 		return companyDaoImpl.addCompany(companyExt) > 0;
