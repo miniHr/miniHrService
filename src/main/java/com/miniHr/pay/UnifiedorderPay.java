@@ -1,25 +1,24 @@
 package com.miniHr.pay;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
-import java.util.SortedMap;
-import java.util.TreeMap;
-
-import org.mortbay.util.ajax.JSON;
-
 import com.miniHr.util.DateUtil;
 import com.miniHr.util.HttpHelper;
 import com.miniHr.util.StringUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 public class UnifiedorderPay {
 	public static final String appid="wxe79c9076ceb26a59";
 	public static final String mchtId="1466649802";
 	public static final String key="66666666666666668888888888888888";
 	public static final String reqUrl = "https://api.mch.weixin.qq.com/pay/unifiedorder";
-	public static final String base = "abcdefghijklmnopqrstuvwxyz0123456789"; 
+	public static final String base = "abcdefghijklmnopqrstuvwxyz0123456789";
+
+	private static Logger log = LoggerFactory.getLogger(UnifiedorderPay.class);
+
 	/**
 	 * 用于生成32位随机字符串
 	 * @return String
@@ -35,19 +34,19 @@ public class UnifiedorderPay {
 	}
 	//统一下单支付
 	public static Map<String, Object> WechatPay(Map<String, String> map){
-		Map<String, Object> resParams = new HashMap<String, Object>();
+		Map<String, Object> resParams;
 		String amount=map.get("amount");
 		String body="展位购买-展位"+map.get("boothid");
 		String openid=map.get("openid");
 		SortedMap<String, String> parameters =getReqParameters(amount,body,openid);
         String xmlInfo = StringUtil.parseXML(parameters);
-        System.out.println("reqMsg===="+xmlInfo);
-        
+		log.info("reqMsg===={}", xmlInfo);
+
         Map<String, Object> params = new HashMap<String, Object>();
 		params.put("reqMsg", xmlInfo);
         String respXml=HttpHelper.post(reqUrl, params);
-		
-		System.out.println("respXml===="+respXml);
+
+		log.info("respXml===={}", respXml);
 		resParams=getRespState(respXml);
 		respXml = StringUtil.deleteCdata(respXml);
 		if(resParams.get("resCode").equals("00")){
