@@ -51,7 +51,7 @@ public class UnifiedorderPay {
 		resParams=getRespState(respXml);
 		respXml = StringUtil.deleteCdata(respXml);
 		if(resParams.get("resCode").equals("00")){
-			resParams.put("redirectParamsMap", JSON.toString(getH5Map(respXml)));
+			resParams.put("redirectParamsMap", getH5Map(respXml));
 		}
 		return resParams;
 		
