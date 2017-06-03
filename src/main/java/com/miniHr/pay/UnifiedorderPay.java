@@ -110,8 +110,7 @@ public class UnifiedorderPay {
 		try {
 			millionSeconds = sdf.parse(DateUtil.formatCurrDateTime(DateUtil.DF_YMDHMS)).getTime();
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			log.error("exception{}:",e);
 		}//毫秒
 		SortedMap<String, String> redirectParamsMap= new TreeMap<String, String>();
 		redirectParamsMap.put("appId", appid);
