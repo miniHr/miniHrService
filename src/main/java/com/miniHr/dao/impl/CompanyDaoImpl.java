@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import com.miniHr.dao.CompanyDao;
@@ -15,12 +17,20 @@ import com.miniHr.entity.Company;
 public class CompanyDaoImpl implements CompanyDao {
 	@Autowired
 	private NamedParameterJdbcTemplate template;
-	
+
+	/**
+	 * 新增企业信息
+	 *
+	 * @param company
+	 * @return 新增记录的主键ID
+     */
 	@Override
 	public int addCompany(Company company) {
 //		String sql = "insert into company(name, job,position,type) values(:name,:job,:position,:type)";
 		String sql = "insert into COMPANY_INFO(COMPANY_NAME, IMAGE,SCALE,ADDRESS,WELFARE,NAME,PHONE,BOOTH_ID,CREATE_DT,CREATER,UPDATE_DT,UPDATER) values(:companyName,:image,:scale,:address,:welfare,:name,:phone,:boothId,sysdate(),'creater',sysdate(),'updater')";
-		return template.update(sql, new BeanPropertySqlParameterSource(company));
+		KeyHolder holder = new GeneratedKeyHolder();
+		template.update(sql, new BeanPropertySqlParameterSource(company), holder);
+		return holder.getKey().intValue();
 	}
 
 	@Override

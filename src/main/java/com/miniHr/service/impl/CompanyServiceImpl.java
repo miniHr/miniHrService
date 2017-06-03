@@ -52,17 +52,17 @@ public class CompanyServiceImpl implements CompanyService {
     /**
      * 添加一个企业信息
      * @param companyExt
-     * @return
+     * @return 新增记录的主键ID
      */
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public boolean insert(CompanyExt companyExt) {
+    public int insert(CompanyExt companyExt) {
         User user = new User();
         user.setOpenId(companyExt.getOpenId());
         user.setLevel(UserLevel.UNPAYED_COMPANY_USER.getLevel());
         userdaoImpl.addUser(user);
 
-        return companyDaoImpl.addCompany(companyExt) > 0;
+        return companyDaoImpl.addCompany(companyExt);
     }
 
     /**

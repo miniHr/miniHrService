@@ -35,9 +35,9 @@ public interface CompanyService {
     /**
      * 添加一个企业信息
      * @param companyExt
-     * @return
+     * @return 新增记录的主键ID
      */
-    boolean insert(CompanyExt companyExt);
+    int insert(CompanyExt companyExt);
 
     /**
      * 查询企业信息
