@@ -32,11 +32,11 @@ public class BoothDaoImpl implements BoothDao {
 	}
 
 	@Override
-	public Booth getBoothById(Integer id) {
+	public List<Booth> getBoothById(Integer id) {
 		String sql = "SELECT * FROM BOOTH_INFO WHERE ID=:id";
 		Map<String,String> paramMap = new HashMap<String,String>();
 		paramMap.put("id", id.toString());
-		return template.queryForObject(sql, paramMap, CustomerRowMapper.newInstance(Booth.class));
+		return template.query(sql, paramMap, CustomerRowMapper.newInstance(Booth.class));
 	}
 	public NamedParameterJdbcTemplate getTemplate() {
 		return template;
@@ -50,6 +50,12 @@ public class BoothDaoImpl implements BoothDao {
 	public int updateBoothInfoWithState(BoothVo vo) {
 		String sql = "UPDATE BOOTH_INFO SET STATE=:state,COMPANY_ID=:companyId,update_dt=current_timestamp where ID=:id AND STATE=:oriState";
 		return template.update(sql, new BeanPropertySqlParameterSource(vo));
+	}
+
+	@Override
+	public List<Booth> getBoothInfoByStateAndId(Booth booth) {
+		String sql = "SELECT * FROM BOOTH_INFO WHERE STATE=:state AND COMPANY_ID=:companyId AND ID=:Id";
+		return template.query(sql, new BeanPropertySqlParameterSource(booth), CustomerRowMapper.newInstance(Booth.class));
 	}
 	
 }

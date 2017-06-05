@@ -23,7 +23,7 @@ public class BoothServiceImpl implements BoothService {
 	}
 
 	@Override
-	public Booth getBoothById(Integer id) {
+	public List<Booth> getBoothById(Integer id) {
 		return boothDao.getBoothById(id);
 	}
 	
@@ -37,6 +37,11 @@ public class BoothServiceImpl implements BoothService {
 		BeanUtils.copyProperties(vo, booth);
 		vo.setOriState(oriState);
 		return boothDao.updateBoothInfoWithState(vo);
+	}
+
+	@Override
+	public List<Booth> queryBoothByStateAndCompanyId(Booth booth) {
+		return boothDao.getBoothInfoByStateAndId(booth);
 	}
 	
 }

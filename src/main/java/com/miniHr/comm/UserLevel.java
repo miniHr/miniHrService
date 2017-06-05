@@ -1,4 +1,4 @@
-package com.miniHr.entity;
+package com.miniHr.comm;
 
 /**
  * 用户等级

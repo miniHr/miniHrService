@@ -5,11 +5,12 @@ import java.util.List;
 import com.miniHr.dao.UserDao;
 import com.miniHr.entity.CompanyExt;
 import com.miniHr.entity.User;
-import com.miniHr.entity.UserLevel;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import com.miniHr.comm.UserLevel;
 import com.miniHr.dao.CompanyDao;
 import com.miniHr.entity.Company;
 import com.miniHr.service.CompanyService;

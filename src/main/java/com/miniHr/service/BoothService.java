@@ -13,10 +13,12 @@ public interface BoothService {
 	/**
 	 * 根据展位id获取展位信息
 	 */
-	public Booth getBoothById(Integer id);
+	public List<Booth> getBoothById(Integer id);
 	
 	public int updateBoothInfo(Booth booth);
 	
 	/**根据原展位状态更新*/
 	public int updateBoothInfoByOriState(Booth booth,String oriState) throws Exception;
+	
+	public List<Booth> queryBoothByStateAndCompanyId(Booth booth);
 }

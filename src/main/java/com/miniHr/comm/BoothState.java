@@ -1,4 +1,4 @@
-package com.miniHr.entity;
+package com.miniHr.comm;
 
 /**
  * 展位状态

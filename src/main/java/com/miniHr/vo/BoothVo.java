@@ -8,7 +8,7 @@ public class BoothVo {
 	/** 展位价格 */
 	private long price;
 	/** 展位状态 1、未购买 2、购买中 3、已购买 */
-	private String state;
+	private String state = "1";
 	/** 所属公司id */
 	private Integer companyId;
 

@@ -35,10 +35,7 @@ public class UnifiedorderPay {
 	//统一下单支付
 	public static Map<String, Object> WechatPay(Map<String, String> map){
 		Map<String, Object> resParams;
-		String amount=map.get("amount");
-		String body="展位购买-展位"+map.get("boothid");
-		String openid=map.get("openid");
-		SortedMap<String, String> parameters =getReqParameters(amount,body,openid);
+		SortedMap<String, String> parameters =getReqParameters(map);
         String xmlInfo = StringUtil.parseXML(parameters);
 		log.info("reqMsg===={}", xmlInfo);
 
@@ -77,25 +74,25 @@ public class UnifiedorderPay {
 		return resParams;
 	}
 	//组装请求参数
-	private static SortedMap<String, String> getReqParameters(String amount,
-			String body, String openid) {
+	private static SortedMap<String, String> getReqParameters(Map<String, String> map) {
+		String openid = map.get("openid");
 		SortedMap<String, String> parameters = new TreeMap<String, String>();  
         parameters.put("appid", appid);  
         parameters.put("mch_id", mchtId);  
         parameters.put("device_info", "");  
         parameters.put("nonce_str", getRandStr());  
         parameters.put("sign_type", "MD5");  
-        parameters.put("body", body); 
+        parameters.put("body", "展位购买-展位" + map.get("boothid")); 
         parameters.put("detail", "");  
         parameters.put("attach", "");  
         parameters.put("out_trade_no",DateUtil.formatCurrDateTime(DateUtil.DF_YMDHMS)+openid.substring(0,10)); 
         parameters.put("fee_type", "CNY"); 
-        parameters.put("total_fee", amount);  
+        parameters.put("total_fee", map.get("amount"));  
         parameters.put("spbill_create_ip", "127.0.0.1");
         parameters.put("time_start", "");  
         parameters.put("time_expire", ""); 
         parameters.put("goods_tag", "");  
-        parameters.put("notify_url", "http://116.228.64.57:80/its-web/strtx/1176/200309/utf-8");  
+        parameters.put("notify_url", "https://116.62.209.238/booth/payCompletly/" + map.get("boothid") + "/" + map.remove("companyId"));  
         parameters.put("trade_type", "JSAPI");  
         parameters.put("product_id", "");  
         parameters.put("limit_pay", "no_credit"); //no_credit 
