@@ -58,12 +58,15 @@ public class CompanyServiceImpl implements CompanyService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public int insert(CompanyExt companyExt) {
+        int companyId = companyDaoImpl.addCompany(companyExt);
+
         User user = new User();
         user.setOpenId(companyExt.getOpenId());
         user.setLevel(UserLevel.UNPAYED_COMPANY_USER.getLevel());
+        user.setCompanyId(companyId);
         userdaoImpl.addUser(user);
 
-        return companyDaoImpl.addCompany(companyExt);
+        return companyId;
     }
 
     /**
