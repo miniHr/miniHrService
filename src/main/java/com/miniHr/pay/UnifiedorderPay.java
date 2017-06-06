@@ -76,6 +76,11 @@ public class UnifiedorderPay {
 	//组装请求参数
 	private static SortedMap<String, String> getReqParameters(Map<String, String> map) {
 		String openid = map.get("openid");
+		SimpleDateFormat sdf = new SimpleDateFormat(DateUtil.DF_YMDHMS);
+		Date now = new Date();
+		String time_start= sdf.format(now);
+		String time_expire=sdf.format(DateUtil.addMinute(now, 10));
+		
 		SortedMap<String, String> parameters = new TreeMap<String, String>();  
         parameters.put("appid", appid);  
         parameters.put("mch_id", mchtId);  
@@ -89,8 +94,8 @@ public class UnifiedorderPay {
         parameters.put("fee_type", "CNY"); 
         parameters.put("total_fee", map.get("amount"));  
         parameters.put("spbill_create_ip", "127.0.0.1");
-        parameters.put("time_start", "");  
-        parameters.put("time_expire", ""); 
+        parameters.put("time_start", time_start);  
+        parameters.put("time_expire", time_expire); 
         parameters.put("goods_tag", "");  
         parameters.put("notify_url", "https://116.62.209.238/booth/payCompletly/" + map.get("boothid") + "/" + map.remove("companyId"));  
         parameters.put("trade_type", "JSAPI");  
@@ -125,6 +130,5 @@ public class UnifiedorderPay {
 //		map.put("boothid", "15");
 //		map.put("openid", "oCeMZ0WUojqOrmtZOA0f1-8qvJg0");
 //		System.out.println(WechatPay(map));
-//		
 //	}
 }
