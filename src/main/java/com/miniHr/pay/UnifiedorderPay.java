@@ -92,7 +92,7 @@ public class UnifiedorderPay {
         parameters.put("time_start", "");  
         parameters.put("time_expire", ""); 
         parameters.put("goods_tag", "");  
-        parameters.put("notify_url", "https://116.62.209.238/booth/payCompletly/" + map.get("boothid") + "/" + map.remove("companyId"));  
+        parameters.put("notify_url", "https://116.62.209.238/booth/payCompletly/" + map.get("boothid") + "/" + openid);  
         parameters.put("trade_type", "JSAPI");  
         parameters.put("product_id", "");  
         parameters.put("limit_pay", "no_credit"); //no_credit 

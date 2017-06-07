@@ -1,11 +1,13 @@
 package com.miniHr.controller;
 
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,10 +17,16 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.miniHr.comm.BoothState;
 import com.miniHr.comm.RespCode;
+import com.miniHr.comm.UserLevel;
 import com.miniHr.comm.VariableKey;
 import com.miniHr.entity.Booth;
+import com.miniHr.entity.Company;
+import com.miniHr.entity.User;
 import com.miniHr.pay.UnifiedorderPay;
+import com.miniHr.pay.WechatSecurity;
 import com.miniHr.service.BoothService;
+import com.miniHr.service.CompanyService;
+import com.miniHr.service.UserService;
 import com.miniHr.util.StringUtil;
 
 @RestController
@@ -27,6 +35,12 @@ public class BoothController {
 	
 	@Autowired
 	private BoothService boothService;
+	
+	@Autowired
+	private UserService userService;
+	
+	@Autowired
+	private CompanyService companyService;
 	
 	@RequestMapping("/booth/query")
 	public Map<String,Object> getAllBoothInfo(){
@@ -59,23 +73,20 @@ public class BoothController {
 			return result;
 		}
 		
-		Booth booth = boothService.getBoothById(boothId).get(0); //根据展位ID查询展位信息
-		//此处判断  如果别的公司在购买该展位，则返回错误码 ，请用户重新购买展位
-		if(BoothState.Saling.getState().equals(booth.getState()) && !companyId.equals(booth.getCompanyId())){
+		Booth booth = new Booth();
+		booth.setId(boothId);
+		booth.setCompanyId(companyId);
+		int i = boothService.updateBoothInfoByOriState(booth, BoothState.Saling.getState());  //根据状态和id更新展位
+		if(i == 0){
 			result.put(VariableKey.RETCODE, RespCode.FAIL.getValue());
-			result.put(VariableKey.RETDATA, "其他公司正在购买该展位");
+			result.put(VariableKey.RETDATA, "该展位被正在被其他公司购买");
 			return result;
 		}
-		//构造参数对象
-		booth.setCompanyId(companyId);
-		booth.setState(BoothState.Saling.getState());
-		boothService.updateBoothInfo(booth); // 将该展位设置为购买中。。。
 		
 		Map<String,String> map = new HashMap<String,String>();
 		map.put("amount", amount);
 		map.put("boothid", boothId.toString());
 		map.put("openid", openId);
-		map.put("companyId", companyId.toString());
 		log.info("构造支付报文" + map);
 		
 		result.put(VariableKey.RETDATA, UnifiedorderPay.WechatPay(map));
@@ -83,26 +94,43 @@ public class BoothController {
 		return result;
 	}
 	
-	@RequestMapping("/booth/payCompletly/{boothId}/{companyId}")
-	public Map<String,Object> completePay(@PathVariable Integer boothId,@PathVariable Integer companyId,HttpServletRequest request,HttpServletResponse response)
+	@RequestMapping("/booth/payCompletly/{boothId}/{openId}")
+	public String completePay(@PathVariable Integer boothId, @PathVariable String openId, HttpServletRequest request,HttpServletResponse response)
 			throws Exception{
-		Map<String,String[]> reciveMap = request.getParameterMap();
-		log.info("接收到的参数：" +reciveMap);
+		InputStream in = request.getInputStream();
+		String content = IOUtils.toString(in);
+		log.info("接收到的通知内容：" + content);
+		IOUtils.closeQuietly(in);
 		
-		Map<String,Object> result = new HashMap<String,Object>();
-		
-		Booth booth = boothService.getBoothById(boothId).get(0);
-		if(BoothState.Saled.getState().equals(booth.getState())){
-			throw new Exception("该展位已被购买");
-		}	
-		
-		booth.setState(BoothState.Saled.getState());
-		booth.setCompanyId(companyId);
-		int i = boothService.updateBoothInfo(booth);
-		if(i == 1){
-			result.put(VariableKey.RETCODE, RespCode.SUCCESS.getValue());
-			result.put(VariableKey.RETDATA, "success");
+		if(!WechatSecurity.verify(StringUtil.deleteCdata(content), UnifiedorderPay.key)){
+			return "<xml><return_code><![CDATA[FAIL]]</return_code><return_msg><![CDATA[verify fail!]]</return_msg></xml>";
 		}
-		return result;
+		
+		/*更新展位表*/
+		Booth booth = boothService.getBoothById(boothId).get(0);
+		booth.setState(BoothState.Saled.getState());
+		int i = boothService.updateBoothInfo(booth);
+		if(i == 1)
+			log.info("更新展位表成功，展位id :" + booth.getId());
+		
+		
+		/*更新用户表，将用户更新为企业用户*/
+		User user = new User();
+		user.setOpenId(openId);
+		user.setLevel(UserLevel.PAYED_COMPANY_USER.getLevel());
+		i = userService.modifyUserLevelByOpenId(user);
+		if(i == 1)
+			log.info("更新用户级别成功");
+		
+		/*更新企业表  将展位id写入企业表*/
+		Company company = new Company();
+		company.setBoothId(boothId);
+		company.setId(booth.getCompanyId());
+		i = companyService.modifyBoothIdOfCompanyById(company);
+		if(i == 1)
+			log.info("为公司添加展位成功");
+		
+		/*收到通知 就认为是成功的 */
+		return "<xml><return_code><![CDATA[SUCCESS]]</return_code><return_msg><![CDATA[ok]]</return_msg></xml>";
 	}
 }

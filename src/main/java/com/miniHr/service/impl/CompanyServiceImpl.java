@@ -19,7 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 /**
  * 企业信息服务实现类
  */
-@Service
+@Service("companyService")
 public class CompanyServiceImpl implements CompanyService {
     @Autowired
     @Qualifier("companyDao")
@@ -75,4 +75,9 @@ public class CompanyServiceImpl implements CompanyService {
     public Company selectCompanyInfo(int id) {
         return companyDaoImpl.selectCompanyInfoById(id);
     }
+
+	@Override
+	public int modifyBoothIdOfCompanyById(Company company) {
+		return companyDaoImpl.updateBoothInfoOfCompanyById(company);
+	}
 }

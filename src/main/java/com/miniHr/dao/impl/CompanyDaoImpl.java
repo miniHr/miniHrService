@@ -64,4 +64,10 @@ public class CompanyDaoImpl implements CompanyDao {
 		return template.queryForList(sql, new BeanPropertySqlParameterSource(company), Company.class).get(0);
 	}
 
+	@Override
+	public int updateBoothInfoOfCompanyById(Company company) {
+		String sql = "update company_info set booth_id=:boothId where id=:id";
+		return template.update(sql, new BeanPropertySqlParameterSource(company));
+	}
+
 }

@@ -22,4 +22,9 @@ public class UserServiceImpl implements UserService {
 		return userDao.getUserById(user);
 	}
 
+	@Override
+	public int modifyUserLevelByOpenId(User user) {
+		return userDao.updateUserLevelInfoById(user);
+	}
+
 }

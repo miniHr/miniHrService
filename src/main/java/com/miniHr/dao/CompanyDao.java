@@ -27,4 +27,7 @@ public interface CompanyDao {
      * @return
      */
 	Company selectCompanyInfoById(int id);
+	
+	/**根据公司Id更新公司表中的展位信息*/
+	int updateBoothInfoOfCompanyById(Company company);
 }

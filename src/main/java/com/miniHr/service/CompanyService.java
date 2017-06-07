@@ -45,4 +45,9 @@ public interface CompanyService {
      * @return
      */
     Company selectCompanyInfo(int id);
+    
+    /**
+     * 为公司添加展位
+     */
+    int modifyBoothIdOfCompanyById(Company company);
 }

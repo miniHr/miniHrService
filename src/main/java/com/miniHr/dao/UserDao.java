@@ -8,4 +8,7 @@ public interface UserDao {
 	
 	/**增加用户*/
 	public User addUser(User user);
+	
+	/**更新用户级别*/
+	public int updateUserLevelInfoById(User user);
 }
