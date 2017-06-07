@@ -133,4 +133,21 @@ public class BoothController {
 		/*收到通知 就认为是成功的 */
 		return "<xml><return_code><![CDATA[SUCCESS]]</return_code><return_msg><![CDATA[ok]]</return_msg></xml>";
 	}
+	
+	@RequestMapping("/booth/revert")
+	public Map<String,Object> cancelPay(Integer boothId){
+		Map<String,Object> result = new HashMap<String,Object>();
+		result.put(VariableKey.RETDATA, "展位退订成功");
+		result.put(VariableKey.RETCODE, RespCode.SUCCESS.getValue());
+		
+		Booth booth = new Booth();
+		booth.setId(boothId);
+		int i = boothService.updateBoothInfo(booth);
+		
+		if(i == 0){
+			result.put(VariableKey.RETCODE, RespCode.FAIL.getValue());
+			result.put(VariableKey.RETDATA, "展位退订失败，请联系客服");
+		}
+		return result;
+	}
 }
