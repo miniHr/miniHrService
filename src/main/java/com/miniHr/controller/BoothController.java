@@ -76,7 +76,8 @@ public class BoothController {
 		Booth booth = new Booth();
 		booth.setId(boothId);
 		booth.setCompanyId(companyId);
-		int i = boothService.updateBoothInfoByOriState(booth, BoothState.Saling.getState());  //根据状态和id更新展位
+		booth.setState(BoothState.Saling.getState());
+		int i = boothService.updateBoothInfoByOriState(booth, BoothState.Unsaled.getState());  //根据状态和id更新展位
 		if(i == 0){
 			result.put(VariableKey.RETCODE, RespCode.FAIL.getValue());
 			result.put(VariableKey.RETDATA, "该展位被正在被其他公司购买");
