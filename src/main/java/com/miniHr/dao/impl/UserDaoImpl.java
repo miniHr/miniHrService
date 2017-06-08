@@ -24,7 +24,7 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public User addUser(User user) {
-		String sql = "INSERT INTO USER_INFO(OPEN_ID,SEX,NAME,PHONE,AGE,INDUSTRY,WORKTIME,EDUCATION,MAJOR,LEVEL,COMPANY_ID,UPDATE_DT) VALUES(:openId,:sex,:name,:phone,:age,:industry,:workTime,:education,:major,:level,:companyId,CURRENT_TIMESTAMP)";
+		String sql = "INSERT INTO USER_INFO(OPEN_ID,SEX,NAME,PHONE,AGE,INDUSTURY,WORKTIME,EDUCATION,MAJOR,LEVEL,COMPANY_ID,UPDATE_DT) VALUES(:openId,:sex,:name,:phone,:age,:industry,:workTime,:education,:major,:level,:companyId,CURRENT_TIMESTAMP)";
 		KeyHolder holder = new GeneratedKeyHolder();
 		template.update(sql, new BeanPropertySqlParameterSource(user), holder);
 		user.setId(holder.getKey().intValue());
