@@ -11,7 +11,7 @@ CREATE TABLE USER_INFO(
         WORKTIME INT COMMENT '工龄',
         EDUCATION VARCHAR(16) COMMENT '学历  1小学，2初中，3高中，4中专，5大专，6本科，7硕士',
         MAJOR VARCHAR(32) COMMENT '专业',
-        LEVEL INT COMMENT '用户等级 1、个人用户   2、企业用户',
+        LEVEL CHAR(1) COMMENT '用户等级 1、个人用户   2、企业用户',
         COMPANY_ID INT COMMENT '公司id',
         CREATE_DT TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         CREATEER VARCHAR(19),
