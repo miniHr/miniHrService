@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.miniHr.comm.RespCode;
+import com.miniHr.comm.VariableKey;
 import com.miniHr.entity.CompanyExt;
 import com.miniHr.util.JsonUtil;
 import org.slf4j.Logger;
@@ -34,12 +36,12 @@ public class CompanyController {
 	public String addCompanyInfo(CompanyExt companyExt) {
 		int resultKey = companyServiceImpl.insert(companyExt);
 		Map<String,Object> retMap = new HashMap<String,Object>();
-		retMap.put("retCode","00");
+		retMap.put(VariableKey.RETCODE, RespCode.SUCCESS.getValue());
 
 		Map<String, Object> retData = new HashMap<String,Object>();
 		retData.put("keyID",resultKey);
 
-		retMap.put("retData",retData);
+		retMap.put(VariableKey.RETDATA,retData);
 		return JsonUtil.toJson(retMap);
 	}
 
@@ -47,8 +49,8 @@ public class CompanyController {
 	public String queryCompanyInfo(@PathVariable int id){
 		Company company = companyServiceImpl.selectCompanyInfo(id);
 		Map<String,Object> retMap = new HashMap<String,Object>();
-		retMap.put("retCode", company == null ? "01" : "00");
-		retMap.put("retData", company);
+		retMap.put(VariableKey.RETCODE, company == null ? RespCode.FAIL.getValue() : RespCode.SUCCESS.getValue());
+		retMap.put(VariableKey.RETDATA, company);
 		return JsonUtil.toJson(retMap);
 	}
 	
