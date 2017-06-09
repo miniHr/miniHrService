@@ -72,7 +72,15 @@ public class BoothController {
             result.put(VariableKey.RETDATA, "购买参数为空");
             return result;
         }
-
+        User user = new User();
+        user.setOpenId(openId);
+        user = userService.getUserById(user);
+        if(UserLevel.PAYED_COMPANY_USER.equals(user.getLevel())){
+        	result.put(VariableKey.RETCODE, RespCode.FAIL.getValue());
+            result.put(VariableKey.RETDATA, "已购买展位");
+            return result;
+        }
+        
         Booth booth = new Booth();
         booth.setId(boothId);
         booth.setCompanyId(companyId);
