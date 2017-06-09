@@ -105,7 +105,7 @@ public class BoothController {
         IOUtils.closeQuietly(in);
 
         if (!WechatSecurity.verify(StringUtil.deleteCdata(content), UnifiedorderPay.key)) {
-            String failRes = "<xml><return_code><![CDATA[FAIL]]</return_code><return_msg><![CDATA[verify fail!]]</return_msg></xml>";
+            String failRes = "<xml><return_code>FAIL</return_code><return_msg>verify fail!</return_msg></xml>";
             out.write(failRes.getBytes());
         }
 
@@ -133,7 +133,7 @@ public class BoothController {
             log.info("为公司添加展位成功");
 
         /* 收到通知 就认为是成功的 */
-        out.write("<xml><return_code><![CDATA[SUCCESS]]</return_code><return_msg><![CDATA[ok]]</return_msg></xml>"
+        out.write("<xml><return_code>SUCCESS</return_code><return_msg>ok</return_msg></xml>"
             .getBytes());
         in.close();
         out.close();

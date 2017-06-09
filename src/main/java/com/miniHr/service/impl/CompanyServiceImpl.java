@@ -56,7 +56,7 @@ public class CompanyServiceImpl implements CompanyService {
      * @return 新增记录的主键ID
      */
     @Override
-    @Transactional(rollbackFor = Exception.class)
+    @Transactional
     public int insert(CompanyExt companyExt) {
         int companyId = companyDaoImpl.addCompany(companyExt);
 
