@@ -66,7 +66,7 @@ public class CompanyDaoImpl implements CompanyDao {
 
 	@Override
 	public int updateBoothInfoOfCompanyById(Company company) {
-		String sql = "update company_info set booth_id=:boothId where id=:id";
+		String sql = "UPDATE COMPANY_INFO SET BOOTH_ID=:boothId WHERE ID=:id";
 		return template.update(sql, new BeanPropertySqlParameterSource(company));
 	}
 

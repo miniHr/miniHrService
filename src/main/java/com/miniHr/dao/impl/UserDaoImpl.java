@@ -13,28 +13,28 @@ import com.miniHr.entity.User;
 
 @Repository("userDao")
 public class UserDaoImpl implements UserDao {
-	@Autowired
-	private NamedParameterJdbcTemplate template;
-	
-	@Override
-	public User getUserById(User user) {
-		String sql = "SELECT * FROM USER_INFO WHERE OPEN_ID=:openId";
-		return template.queryForObject(sql, new BeanPropertySqlParameterSource(user), CustomerRowMapper.newInstance(User.class));
-	}
+    @Autowired
+    private NamedParameterJdbcTemplate template;
+    
+    @Override
+    public User getUserById(User user) {
+        String sql = "SELECT * FROM USER_INFO WHERE OPEN_ID=:openId";
+        return template.queryForObject(sql, new BeanPropertySqlParameterSource(user), CustomerRowMapper.newInstance(User.class));
+    }
 
-	@Override
-	public User addUser(User user) {
-		String sql = "INSERT INTO USER_INFO(OPEN_ID,SEX,NAME,PHONE,AGE,INDUSTRY,WORKTIME,EDUCATION,MAJOR,LEVEL,COMPANY_ID,UPDATE_DT) VALUES(:openId,:sex,:name,:phone,:age,:industry,:workTime,:education,:major,:level,:companyId,CURRENT_TIMESTAMP)";
-		KeyHolder holder = new GeneratedKeyHolder();
-		template.update(sql, new BeanPropertySqlParameterSource(user), holder);
-		user.setId(holder.getKey().intValue());
-		return user;
-	}
+    @Override
+    public User addUser(User user) {
+        String sql = "INSERT INTO USER_INFO(OPEN_ID,SEX,NAME,PHONE,AGE,INDUSTRY,WORKTIME,EDUCATION,MAJOR,LEVEL,COMPANY_ID,UPDATE_DT) VALUES(:openId,:sex,:name,:phone,:age,:industry,:workTime,:education,:major,:level,:companyId,CURRENT_TIMESTAMP)";
+        KeyHolder holder = new GeneratedKeyHolder();
+        template.update(sql, new BeanPropertySqlParameterSource(user), holder);
+        user.setId(holder.getKey().intValue());
+        return user;
+    }
 
-	@Override
-	public int updateUserLevelInfoById(User user) {
-		String sql = "update user_info set level=:level where open_id=:openId";
-		return template.update(sql, new BeanPropertySqlParameterSource(user));
-	}
-	
+    @Override
+    public int updateUserLevelInfoById(User user) {
+        String sql = "UPDATE USER_INFO SET LEVEL=:level WHERE OPEN_ID=:openId";
+        return template.update(sql, new BeanPropertySqlParameterSource(user));
+    }
+    
 }
