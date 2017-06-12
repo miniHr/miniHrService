@@ -3,7 +3,6 @@ package com.miniHr.service.impl;
 import com.miniHr.comm.ResumeLevel;
 import com.miniHr.dao.JobDao;
 import com.miniHr.dao.ResumeDao;
-import com.miniHr.dao.UserDao;
 import com.miniHr.entity.Job;
 import com.miniHr.entity.Resume;
 import com.miniHr.service.ResumeService;
