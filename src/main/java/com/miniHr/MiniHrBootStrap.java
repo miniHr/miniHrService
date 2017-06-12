@@ -21,7 +21,7 @@ public class MiniHrBootStrap {
 			SpringApplication.run(MiniHrBootStrap.class, args);
 		}catch(Exception e){
 			e.printStackTrace();
-			log.error("miniHr启动异常");
+			log.error("miniHr启动异常。。。");
 		}
 	}
 	
