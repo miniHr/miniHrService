@@ -6,6 +6,8 @@ import com.miniHr.entity.Resume;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 
 /**
  * Created by DELL on 2017/6/12.
@@ -37,6 +39,8 @@ public class ResumeDaoImpl implements ResumeDao {
     public int insert(Resume resume) {
         String sql = "INSERT INTO RESUME (OPENID, JOB_ID, COMPANY_ID, STATE, CREATE_DT, CREATER, UPDATE_DT, UPDATER) " +
                 "VALUES (:openid, :jobId, :companyId, :state, 'sysdate()', 'system', 'sysdate()', 'system')";
-        return namedParameterJdbcTemplate.update(sql, new BeanPropertySqlParameterSource(resume));
+        KeyHolder holder = new GeneratedKeyHolder();
+        namedParameterJdbcTemplate.update(sql, new BeanPropertySqlParameterSource(resume), holder);
+        return holder.getKey().intValue();
     }
 }
