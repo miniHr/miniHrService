@@ -8,10 +8,12 @@ import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
+import org.springframework.stereotype.Repository;
 
 /**
  * Created by DELL on 2017/6/12.
  */
+@Repository
 public class ResumeDaoImpl implements ResumeDao {
 
     @Autowired
@@ -38,7 +40,7 @@ public class ResumeDaoImpl implements ResumeDao {
     @Override
     public int insert(Resume resume) {
         String sql = "INSERT INTO RESUME (OPENID, JOB_ID, COMPANY_ID, STATE, CREATE_DT, CREATER, UPDATE_DT, UPDATER) " +
-                "VALUES (:openid, :jobId, :companyId, :state, 'sysdate()', 'system', 'sysdate()', 'system')";
+                "VALUES (:openid, :jobId, :companyId, :state, sysdate(), 'system', sysdate(), 'system')";
         KeyHolder holder = new GeneratedKeyHolder();
         namedParameterJdbcTemplate.update(sql, new BeanPropertySqlParameterSource(resume), holder);
         return holder.getKey().intValue();

@@ -9,7 +9,7 @@ import org.springframework.context.annotation.ImportResource;
 
 @SpringBootApplication(scanBasePackages = {"com.miniHr.controller","com.miniHr.service","com.miniHr.dao.impl"})
 @Configuration
-@ImportResource({"spring/pay-config.xml"})
+@ImportResource({"classpath:spring/pay-config.xml"})
 public class MiniHrBootStrap {
 
 	private static Logger log = LoggerFactory.getLogger(MiniHrBootStrap.class);
