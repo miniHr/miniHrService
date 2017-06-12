@@ -3,12 +3,15 @@ package com.miniHr.dao.impl;
 import com.miniHr.dao.CustomerRowMapper;
 import com.miniHr.dao.ResumeDao;
 import com.miniHr.entity.Resume;
+import com.miniHr.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 /**
  * Created by DELL on 2017/6/12.
@@ -44,5 +47,17 @@ public class ResumeDaoImpl implements ResumeDao {
         KeyHolder holder = new GeneratedKeyHolder();
         namedParameterJdbcTemplate.update(sql, new BeanPropertySqlParameterSource(resume), holder);
         return holder.getKey().intValue();
+    }
+
+    /**
+     * 企业用户获取所在公司收到的所有简历信息
+     *
+     * @param resume
+     * @return
+     */
+    @Override
+    public List<User> selectByCompanyUser(Resume resume) {
+        String sql = "select u.* from USER_INFO u where OPEN_ID IN (select r.OPENID from RESUME r where r.COMPANY_ID=:companyId and r.state=:state AND r.OPENID !=:openid)";
+        return namedParameterJdbcTemplate.query(sql, new BeanPropertySqlParameterSource(resume), CustomerRowMapper.newInstance(User.class));
     }
 }

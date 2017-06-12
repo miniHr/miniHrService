@@ -5,11 +5,14 @@ import com.miniHr.dao.JobDao;
 import com.miniHr.dao.ResumeDao;
 import com.miniHr.entity.Job;
 import com.miniHr.entity.Resume;
+import com.miniHr.entity.User;
 import com.miniHr.service.ResumeService;
 import com.miniHr.vo.ResumeVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 /**
  * 简历授权信息实现类
@@ -44,5 +47,16 @@ public class ResumeServiceImpl implements ResumeService {
         resume.setCompanyId(job.getCompanyId());
         resume.setState(ResumeLevel.Processing.getLevel());
         return resumeDaoImpl.insert(resume);
+    }
+
+    /**
+     * 2.企业用户获取所在公司的求职简历
+     *
+     * @param resume
+     * @return
+     */
+    @Override
+    public List<User> queryUserInfosByCompanyUser(Resume resume) {
+        return resumeDaoImpl.selectByCompanyUser(resume);
     }
 }

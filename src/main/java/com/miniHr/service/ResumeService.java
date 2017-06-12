@@ -1,6 +1,10 @@
 package com.miniHr.service;
 
+import com.miniHr.entity.Resume;
+import com.miniHr.entity.User;
 import com.miniHr.vo.ResumeVo;
+
+import java.util.List;
 
 /**
  * 简历授权相关服务接口
@@ -15,4 +19,12 @@ public interface ResumeService {
      * @return
      */
     int addResumeInfo(ResumeVo resumeVo);
+
+    /**
+     * 2.企业用户获取所在公司的求职简历
+     *
+     * @param resume
+     * @return
+     */
+    List<User> queryUserInfosByCompanyUser(Resume resume);
 }

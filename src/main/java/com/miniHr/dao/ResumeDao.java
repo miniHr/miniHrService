@@ -1,6 +1,9 @@
 package com.miniHr.dao;
 
 import com.miniHr.entity.Resume;
+import com.miniHr.entity.User;
+
+import java.util.List;
 
 /**
  * 简历授权Dao
@@ -22,4 +25,11 @@ public interface ResumeDao {
      * @return
      */
     int insert(Resume resume);
+
+    /**
+     * 企业用户获取所在公司收到的所有简历信息
+     * @param resume
+     * @return
+     */
+    List<User> selectByCompanyUser(Resume resume);
 }

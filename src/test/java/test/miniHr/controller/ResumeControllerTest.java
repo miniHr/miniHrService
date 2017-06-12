@@ -53,4 +53,19 @@ public class ResumeControllerTest {
 
         log.info("status = {}, content = {}", status, content);
     }
+
+    @Test
+    public void queryResume() throws Exception {
+        String uri = "/resume/query";
+        MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.get(uri).param("openId","oCeMZ0S_N6N-ZlFQJg5WXk7hr0_U")
+                .param("level","2")
+                .param("state", "1").accept(MediaType.APPLICATION_JSON))
+                .andReturn();
+
+        int status = mvcResult.getResponse().getStatus();
+        String content = mvcResult.getResponse().getContentAsString();
+
+        log.info("status = {}, content = {}", status, content);
+
+    }
 }
