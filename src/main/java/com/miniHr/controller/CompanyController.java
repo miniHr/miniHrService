@@ -46,8 +46,8 @@ public class CompanyController {
 	}
 
 	@GetMapping(value = "/query")
-	public String queryCompanyInfo(@PathVariable int id){
-		Company company = companyServiceImpl.selectCompanyInfo(id);
+	public String queryCompanyInfo(@PathVariable String id){
+		Company company = companyServiceImpl.selectCompanyInfo(Integer.parseInt(id));
 		Map<String,Object> retMap = new HashMap<String,Object>();
 		retMap.put(VariableKey.RETCODE, company == null ? RespCode.FAIL.getValue() : RespCode.SUCCESS.getValue());
 		retMap.put(VariableKey.RETDATA, company);
