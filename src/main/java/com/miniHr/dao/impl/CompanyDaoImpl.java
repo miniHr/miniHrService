@@ -58,7 +58,7 @@ public class CompanyDaoImpl implements CompanyDao {
 	 */
 	@Override
 	public Company selectCompanyInfoById(int id) {
-		String sql = "select * from company where id=:id";
+		String sql = "SELECT * FROM COMPANY_INFO WHERE ID=:id";
 		Company company = new Company();
 		company.setId(id);
 		return template.queryForList(sql, new BeanPropertySqlParameterSource(company), Company.class).get(0);
