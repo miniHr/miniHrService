@@ -45,7 +45,7 @@ public class CompanyController {
 		return JsonUtil.toJson(retMap);
 	}
 
-	@GetMapping(value = "/query/{id}")
+	@GetMapping(value = "/query")
 	public String queryCompanyInfo(@PathVariable int id){
 		Company company = companyServiceImpl.selectCompanyInfo(id);
 		Map<String,Object> retMap = new HashMap<String,Object>();
