@@ -27,4 +27,12 @@ public interface ResumeService {
      * @return
      */
     List<User> queryUserInfosByCompanyUser(Resume resume);
+
+    /**
+     * 3.更改简历授权状态
+     *
+     * @param resume
+     * @return 更新影响的记录条数
+     */
+    int modifyByState(Resume resume);
 }

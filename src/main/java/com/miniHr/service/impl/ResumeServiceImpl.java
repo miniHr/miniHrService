@@ -59,4 +59,15 @@ public class ResumeServiceImpl implements ResumeService {
     public List<User> queryUserInfosByCompanyUser(Resume resume) {
         return resumeDaoImpl.selectByCompanyUser(resume);
     }
+
+    /**
+     * 3.更改简历授权状态
+     *
+     * @param resume
+     * @return 更新影响的记录条数
+     */
+    @Override
+    public int modifyByState(Resume resume) {
+        return resumeDaoImpl.updateResumeInfo(resume);
+    }
 }

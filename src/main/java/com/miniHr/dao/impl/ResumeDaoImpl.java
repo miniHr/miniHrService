@@ -60,4 +60,16 @@ public class ResumeDaoImpl implements ResumeDao {
         String sql = "select u.* from USER_INFO u where OPEN_ID IN (select r.OPENID from RESUME r where r.COMPANY_ID=:companyId and r.state=:state AND r.OPENID !=:openid)";
         return namedParameterJdbcTemplate.query(sql, new BeanPropertySqlParameterSource(resume), CustomerRowMapper.newInstance(User.class));
     }
+
+    /**
+     * 通过对象更新对象
+     *
+     * @param resume
+     * @return
+     */
+    @Override
+    public int updateResumeInfo(Resume resume) {
+        String sql = "update RESUME set STATE =:state where id=:id";
+        return namedParameterJdbcTemplate.update(sql, new BeanPropertySqlParameterSource(resume));
+    }
 }

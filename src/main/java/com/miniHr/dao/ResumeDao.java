@@ -32,4 +32,12 @@ public interface ResumeDao {
      * @return
      */
     List<User> selectByCompanyUser(Resume resume);
+
+    /**
+     * 通过对象更新对象
+     *
+     * @param resume
+     * @return
+     */
+    int updateResumeInfo(Resume resume);
 }

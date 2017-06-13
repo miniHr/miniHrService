@@ -66,6 +66,31 @@ public class ResumeControllerTest {
         String content = mvcResult.getResponse().getContentAsString();
 
         log.info("status = {}, content = {}", status, content);
+    }
 
+    @Test
+    public void saveResume() throws Exception {
+        String uri = "/resume/save";
+        MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.get(uri)
+                .param("id", "1").accept(MediaType.APPLICATION_JSON))
+                .andReturn();
+
+        int status = mvcResult.getResponse().getStatus();
+        String content = mvcResult.getResponse().getContentAsString();
+
+        log.info("status = {}, content = {}", status, content);
+    }
+
+    @Test
+    public void deleteResume() throws Exception {
+        String uri = "/resume/delete";
+        MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.get(uri)
+                .param("id", "1").accept(MediaType.APPLICATION_JSON))
+                .andReturn();
+
+        int status = mvcResult.getResponse().getStatus();
+        String content = mvcResult.getResponse().getContentAsString();
+
+        log.info("status = {}, content = {}", status, content);
     }
 }

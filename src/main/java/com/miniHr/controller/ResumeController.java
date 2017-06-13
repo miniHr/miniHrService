@@ -1,6 +1,7 @@
 package com.miniHr.controller;
 
 import com.miniHr.comm.RespCode;
+import com.miniHr.comm.ResumeLevel;
 import com.miniHr.comm.UserLevel;
 import com.miniHr.comm.VariableKey;
 import com.miniHr.entity.Resume;
@@ -91,8 +92,41 @@ public class ResumeController {
         retData.put(VariableKey.LISTINFOS, users);
 
         retMap.put(VariableKey.RETDATA, retData);
-        retMap.put(VariableKey.RETCODE, "00");
+        retMap.put(VariableKey.RETCODE, RespCode.SUCCESS.getValue());
 
         return JsonUtil.toJson(retMap);
+    }
+
+    /**
+     * 简历收藏
+     *
+     * @param id
+     * @return
+     */
+    @GetMapping(value = "/save")
+    public String saveResume(int id) {
+        Map<String,Object> retMap = new HashMap<>();
+        retMap.put(VariableKey.RETCODE, updateResume(ResumeLevel.Store.getLevel(), id) == 1 ? RespCode.SUCCESS.getValue() : RespCode.FAIL.getValue());
+        return JsonUtil.toJson(retMap);
+    }
+
+    /**
+     * 简历删除
+     *
+     * @param id
+     * @return
+     */
+    @GetMapping(value = "/delete")
+    public String deleteResume(int id) {
+        Map<String,Object> retMap = new HashMap<>();
+        retMap.put(VariableKey.RETCODE, updateResume(ResumeLevel.Delete.getLevel(), id) == 1 ? RespCode.SUCCESS.getValue() : RespCode.FAIL.getValue());
+        return JsonUtil.toJson(retMap);
+    }
+
+    public int updateResume(String state, int id) {
+        Resume resume = new Resume();
+        resume.setId(id);
+        resume.setState(state);
+        return resumeServiceImpl.modifyByState(resume);
     }
 }
