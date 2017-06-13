@@ -36,7 +36,7 @@ public class UserController {
 		return result;
 	}
 	
-	@RequestMapping("/insert")
+	@RequestMapping("/user/insert")
 	public Map<String,Object> register(User user){
 		Map<String,Object> result = new HashMap<String,Object>();
 		result.put(VariableKey.RETCODE, RespCode.FAIL.getValue());
