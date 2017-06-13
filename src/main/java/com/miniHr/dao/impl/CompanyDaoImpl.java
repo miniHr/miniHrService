@@ -2,6 +2,8 @@ package com.miniHr.dao.impl;
 
 import java.util.List;
 
+import com.miniHr.dao.CustomerRowMapper;
+import com.miniHr.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -61,7 +63,7 @@ public class CompanyDaoImpl implements CompanyDao {
 		String sql = "SELECT * FROM COMPANY_INFO WHERE ID=:id";
 		Company company = new Company();
 		company.setId(id);
-		return template.queryForList(sql, new BeanPropertySqlParameterSource(company), Company.class).get(0);
+		return template.queryForObject(sql, new BeanPropertySqlParameterSource(company), CustomerRowMapper.newInstance(Company.class));
 	}
 
 	@Override
