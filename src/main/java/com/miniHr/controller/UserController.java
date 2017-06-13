@@ -38,6 +38,7 @@ public class UserController {
 	
 	@RequestMapping("/user/insert")
 	public Map<String,Object> register(User user){
+		user.setLevel("1");
 		Map<String,Object> result = new HashMap<String,Object>();
 		result.put(VariableKey.RETCODE, RespCode.FAIL.getValue());
 		
