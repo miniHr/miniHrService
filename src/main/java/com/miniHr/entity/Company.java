@@ -12,7 +12,7 @@ public class Company implements Serializable {
 	/**
 	 * 公司规模
 	 */
-	private Integer scale;
+	private String scale;
 	private String address;
 	private String welfare;
 	/**
@@ -50,11 +50,11 @@ public class Company implements Serializable {
 		this.image = image;
 	}
 
-	public Integer getScale() {
+	public String getScale() {
 		return scale;
 	}
 
-	public void setScale(Integer scale) {
+	public void setScale(String scale) {
 		this.scale = scale;
 	}
 
