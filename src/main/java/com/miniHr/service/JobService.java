@@ -2,6 +2,7 @@ package com.miniHr.service;
 
 import com.miniHr.entity.Company;
 import com.miniHr.entity.Job;
+import com.miniHr.entity.JobExt;
 
 import java.util.List;
 
@@ -41,5 +42,5 @@ public interface JobService {
      * @param openId
      * @return
      */
-    List<Job> recommendJobs(String openId);
+    List<JobExt> recommendJobs(String openId);
 }

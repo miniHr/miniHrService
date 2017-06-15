@@ -4,6 +4,7 @@ import com.miniHr.dao.CompanyDao;
 import com.miniHr.dao.JobDao;
 import com.miniHr.entity.Company;
 import com.miniHr.entity.Job;
+import com.miniHr.entity.JobExt;
 import com.miniHr.entity.User;
 import com.miniHr.service.JobService;
 import com.miniHr.service.UserService;
@@ -71,7 +72,7 @@ public class JobServiceImpl implements JobService {
      * @return
      */
     @Override
-    public List<Job> recommendJobs(String openId) {
+    public List<JobExt> recommendJobs(String openId) {
         /**获取用户信息*/
         User user = new User();
         user.setOpenId(openId);

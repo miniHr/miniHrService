@@ -5,6 +5,7 @@ import com.miniHr.comm.VariableKey;
 import com.miniHr.entity.Company;
 import com.miniHr.entity.CompanyExt;
 import com.miniHr.entity.Job;
+import com.miniHr.entity.JobExt;
 import com.miniHr.service.CompanyService;
 import com.miniHr.service.JobService;
 import com.miniHr.service.UserService;
@@ -41,7 +42,7 @@ public class JobController {
 	@GetMapping(value = "/recommend")
 	public String recommend(String openId) {
 		log.info("recommend request param:{}", openId);
-		List<Job> jobs = jobServiceImpl.recommendJobs(openId);
+		List<JobExt> jobs = jobServiceImpl.recommendJobs(openId);
 		Map<String,Object> retMap = new HashMap<>();
 		retMap.put(VariableKey.RETCODE, RespCode.SUCCESS.getValue());
 

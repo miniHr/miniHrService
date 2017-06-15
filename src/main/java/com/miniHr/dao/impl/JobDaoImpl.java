@@ -4,6 +4,7 @@ import com.miniHr.dao.CustomerRowMapper;
 import com.miniHr.dao.JobDao;
 import com.miniHr.entity.Company;
 import com.miniHr.entity.Job;
+import com.miniHr.entity.JobExt;
 import com.miniHr.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
@@ -55,29 +56,30 @@ public class JobDaoImpl implements JobDao {
      * @return
      */
     @Override
-    public List<Job> selectJobByUserInfo(User user) {
-        StringBuffer sql = new StringBuffer("select * from JOB where 1=1 ");
+    public List<JobExt> selectJobByUserInfo(User user) {
+        StringBuffer sql = new StringBuffer("select j.*,c.COMPANY_NAME, c.IMAGE  from JOB j left join COMPANY_INFO c on c.ID=j.COMPANY_ID where 1=1 ");
 
         /**年龄*/
         if (!StringUtils.isEmpty(user.getAge())) {
-            sql.append("and MINAGE <=:age and MAXAGE >=:age ");
+            sql.append("and j.MINAGE <=:age and j.MAXAGE >=:age ");
         }
         /**性别*/
         if(!StringUtils.isEmpty(user.getSex())) {
-            sql.append("and GENDER=:sex ");
+            sql.append("and j.GENDER=:sex ");
         }
         /**学历*/
         if(!StringUtils.isEmpty(user.getEducation())) {
-            sql.append("and EDUCATION=:education ");
+            sql.append("and j.EDUCATION=:education ");
         }
         /**行业*/
         if (!StringUtils.isEmpty(user.getIndustry()) && user.getIndustry().indexOf("应届") < 0 ) {
-            sql.append("and INDUSTRY like %:industry% ");
+            user.setIndustry("%" + user.getIndustry() + "%");
+            sql.append("and j.INDUSTRY like :industry ");
         }
 
         /**只能十条记录*/
         sql.append("limit 0,10 ");
 
-        return namedParameterJdbcTemplate.query(sql.toString(), new BeanPropertySqlParameterSource(user), CustomerRowMapper.newInstance(Job.class));
+        return namedParameterJdbcTemplate.query(sql.toString(), new BeanPropertySqlParameterSource(user), CustomerRowMapper.newInstance(JobExt.class));
     }
 }
