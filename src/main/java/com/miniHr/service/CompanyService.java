@@ -11,28 +11,6 @@ import com.miniHr.entity.CompanyExt;
 public interface CompanyService {
 
     /**
-     * 新增一个职位
-     * @param name
-     * @param job
-     * @param position
-     * @param type
-     */
-    void create(String name,String job,String position,String type);
-    
-    /**
-     * 根据id删除一个职位
-     * @param id
-     */
-    void deleteById	(Integer id);
-    
-    /**
-     * 根据type查询职位
-     * @param company
-     * @return
-     */
-    List<Company> findByType(Company company);
-
-    /**
      * 添加一个企业信息
      * @param companyExt
      * @return 新增记录的主键ID

@@ -5,4 +5,6 @@ public class VariableKey {
 	public static final String RETDATA = "retData";
 
 	public static final String LISTINFOS = "listInfos";
+
+	public static final String RETDATA_TWO = "retDataTwo";
 }

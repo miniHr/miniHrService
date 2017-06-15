@@ -29,27 +29,6 @@ public class CompanyServiceImpl implements CompanyService {
     @Qualifier("userDao")
     private UserDao userdaoImpl;
 
-    @Override
-    public void create(String name, String job, String position, String type) {
-        Company company = new Company();
-        // company.setJob(job);
-        // company.setName(name);
-        // company.setPosition(Integer.parseInt(position));
-        // company.setType(type);
-        companyDaoImpl.addCompany(company);
-    }
-
-    @Override
-    public void deleteById(Integer id) {
-
-    }
-
-    @Override
-    public List<Company> findByType(Company company) {
-        // return companyDaoImpl.findByType(company.getType());
-        return null;
-    }
-
     /**
      * 添加一个企业信息
      * @param companyExt

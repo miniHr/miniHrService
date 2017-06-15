@@ -7,6 +7,8 @@ import java.util.Map;
 import com.miniHr.comm.RespCode;
 import com.miniHr.comm.VariableKey;
 import com.miniHr.entity.CompanyExt;
+import com.miniHr.entity.Job;
+import com.miniHr.service.JobService;
 import com.miniHr.util.JsonUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,22 +25,18 @@ public class CompanyController {
 	
 	@Autowired
 	private CompanyService companyServiceImpl;
-	
-	@RequestMapping(value = "/query/{type}")
-	public List<Company> queryJob(@PathVariable String type) {
-		log.info("接收到应聘者请求！！");
-		Company company = new Company();
-//		company.setType(type);
-		return companyServiceImpl.findByType(company);
-	}
+
+	@Autowired
+	private JobService jobServiceImpl;
 
 	@GetMapping(value = "/insert")
 	public String addCompanyInfo(CompanyExt companyExt) {
+		log.info("addCompanyInfo request param:{}", companyExt);
 		int resultKey = companyServiceImpl.insert(companyExt);
-		Map<String,Object> retMap = new HashMap<String,Object>();
+		Map<String,Object> retMap = new HashMap<>();
 		retMap.put(VariableKey.RETCODE, RespCode.SUCCESS.getValue());
 
-		Map<String, Object> retData = new HashMap<String,Object>();
+		Map<String, Object> retData = new HashMap<>();
 		retData.put("keyID",resultKey);
 
 		retMap.put(VariableKey.RETDATA,retData);
@@ -48,9 +46,13 @@ public class CompanyController {
 	@GetMapping(value = "/query")
 	public String queryCompanyInfo(String id){
 		Company company = companyServiceImpl.selectCompanyInfo(Integer.parseInt(id));
-		Map<String,Object> retMap = new HashMap<String,Object>();
+
+		List<Job> jobs = jobServiceImpl.findByCompanyId(company);
+
+		Map<String,Object> retMap = new HashMap<>();
 		retMap.put(VariableKey.RETCODE, company == null ? RespCode.FAIL.getValue() : RespCode.SUCCESS.getValue());
 		retMap.put(VariableKey.RETDATA, company);
+		retMap.put(VariableKey.RETDATA_TWO, jobs);
 		return JsonUtil.toJson(retMap);
 	}
 	
