@@ -34,4 +34,12 @@ public interface JobService {
      * @return
      */
     List<Job> findByCompanyId(Company company);
+
+    /**
+     * 根据用户ID获取职位信息
+     *
+     * @param openId
+     * @return
+     */
+    List<Job> recommendJobs(String openId);
 }

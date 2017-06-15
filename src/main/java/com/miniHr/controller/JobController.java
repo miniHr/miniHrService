@@ -7,6 +7,7 @@ import com.miniHr.entity.CompanyExt;
 import com.miniHr.entity.Job;
 import com.miniHr.service.CompanyService;
 import com.miniHr.service.JobService;
+import com.miniHr.service.UserService;
 import com.miniHr.util.JsonUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,17 +32,37 @@ public class JobController {
 	@Autowired
 	private JobService jobServiceImpl;
 
-	@GetMapping(value = "/insert")
-	public String addCompanyInfo(CompanyExt companyExt) {
-		int resultKey = companyServiceImpl.insert(companyExt);
-		Map<String,Object> retMap = new HashMap<String,Object>();
+	/**
+	 * 职位推荐
+	 *
+	 * @param openId
+	 * @return
+     */
+	@GetMapping(value = "/recommend")
+	public String recommend(String openId) {
+		log.info("recommend request param:{}", openId);
+		List<Job> jobs = jobServiceImpl.recommendJobs(openId);
+		Map<String,Object> retMap = new HashMap<>();
 		retMap.put(VariableKey.RETCODE, RespCode.SUCCESS.getValue());
 
-		Map<String, Object> retData = new HashMap<String,Object>();
-		retData.put("keyID",resultKey);
+		Map<String, Object> retData = new HashMap<>();
+		retData.put(VariableKey.LISTINFOS ,jobs);
 
 		retMap.put(VariableKey.RETDATA,retData);
-		return JsonUtil.toJson(retMap);
+		String retStr = JsonUtil.toJson(retMap);
+		log.info("recommend response param:{}", retStr);
+		return retStr;
+	}
+
+	/**
+	 * 职位查询
+	 *
+	 * @return
+     */
+	@GetMapping(value = "/query")
+	public String queryJobInfo() {
+
+		return null;
 	}
 
 }

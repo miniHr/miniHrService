@@ -4,7 +4,9 @@ import com.miniHr.dao.CompanyDao;
 import com.miniHr.dao.JobDao;
 import com.miniHr.entity.Company;
 import com.miniHr.entity.Job;
+import com.miniHr.entity.User;
 import com.miniHr.service.JobService;
+import com.miniHr.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -25,6 +27,9 @@ public class JobServiceImpl implements JobService {
 
     @Autowired
     private JobDao jobDaoImpl;
+
+    @Autowired
+    private UserService userService;
 
     /**
      * 新增一个职位
@@ -57,5 +62,21 @@ public class JobServiceImpl implements JobService {
     @Override
     public List<Job> findByCompanyId(Company company) {
         return jobDaoImpl.selectJobByCompanyInfo(company);
+    }
+
+    /**
+     * 根据用户ID获取职位信息
+     *
+     * @param openId
+     * @return
+     */
+    @Override
+    public List<Job> recommendJobs(String openId) {
+        /**获取用户信息*/
+        User user = new User();
+        user.setOpenId(openId);
+        user = userService.getUserById(user);
+
+        return jobDaoImpl.selectJobByUserInfo(user);
     }
 }

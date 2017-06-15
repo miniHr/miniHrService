@@ -2,6 +2,7 @@ package com.miniHr.dao;
 
 import com.miniHr.entity.Company;
 import com.miniHr.entity.Job;
+import com.miniHr.entity.User;
 
 import java.util.List;
 
@@ -26,4 +27,13 @@ public interface JobDao {
      * @return
      */
     List<Job> selectJobByCompanyInfo(Company company);
+
+    /**
+     * 查询职位信息通过用户信息<br/>
+     * （职位推荐）
+     *
+     * @param user
+     * @return
+     */
+    List<Job> selectJobByUserInfo(User user);
 }
