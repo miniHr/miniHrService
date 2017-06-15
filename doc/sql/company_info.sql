@@ -22,7 +22,7 @@ DROP TABLE IF EXISTS `COMPANY_INFO`;
 CREATE TABLE `COMPANY_INFO` (
   `ID` int(11) NOT NULL auto_increment COMMENT '公司ID',
   `COMPANY_NAME` varchar(32) NOT NULL default '' COMMENT '公司名',
-  `IMAGE` varchar(16) default '' COMMENT '公司图标',
+  `IMAGE` varchar(100) default '' COMMENT '公司图标',
   `SCALE` varchar(16) default '' COMMENT '公司规模',
   `ADDRESS` varchar(64) default '' COMMENT '公司地址',
   `WELFARE` varchar(64) default '' COMMENT '公司福利',
