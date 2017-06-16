@@ -6,6 +6,7 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -39,7 +40,7 @@ public class UserController {
 	@RequestMapping("/user/insert")
 	public Map<String,Object> register(User user){
 		user.setLevel("1");
-		Map<String,Object> result = new HashMap<String,Object>();
+		Map<String,Object> result = new HashMap<>();
 		result.put(VariableKey.RETCODE, RespCode.FAIL.getValue());
 		
 		user = userService.addUser(user);
@@ -48,5 +49,27 @@ public class UserController {
 			result.put(VariableKey.RETCODE, RespCode.SUCCESS.getValue());
 		}	
 		return result;
+	}
+
+	/**
+	 * 更新用户信息
+	 *
+	 * @param openId
+	 * @param name
+	 * @param phone
+     * @return
+     */
+	@GetMapping(value = "/user/update")
+	public Map<String, String> update(String openId, String name, String phone) {
+		User user = new User();
+		user.setOpenId(openId);
+		user.setName(name);
+		user.setPhone(phone);
+
+		userService.modifyUserPhone(user);
+
+		Map<String,String> retMap = new HashMap<>();
+		retMap.put(VariableKey.RETCODE, RespCode.SUCCESS.getValue());
+		return retMap;
 	}
 }

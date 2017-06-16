@@ -36,5 +36,16 @@ public class UserDaoImpl implements UserDao {
         String sql = "UPDATE USER_INFO SET LEVEL=:level WHERE OPEN_ID=:openId";
         return template.update(sql, new BeanPropertySqlParameterSource(user));
     }
-    
+
+    /**
+     * 更新用户信息
+     *
+     * @param user
+     */
+    @Override
+    public void updateUserPhone(User user) {
+        String sql = "UPDATE USER_INFO SET NAME=:name, PHONE=:phone WHERE OPEN_ID=:openId";
+        template.update(sql, new BeanPropertySqlParameterSource(user));
+    }
+
 }

@@ -27,4 +27,14 @@ public class UserServiceImpl implements UserService {
 		return userDao.updateUserLevelInfoById(user);
 	}
 
+	/**
+	 * 修改用户信息
+	 *
+	 * @param user
+	 */
+	@Override
+	public void modifyUserPhone(User user) {
+		userDao.updateUserPhone(user);
+	}
+
 }

@@ -11,4 +11,11 @@ public interface UserDao {
 	
 	/**更新用户级别*/
 	public int updateUserLevelInfoById(User user);
+
+	/**
+	 * 更新用户信息
+	 *
+	 * @param user
+     */
+	void updateUserPhone(User user);
 }
