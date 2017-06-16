@@ -66,7 +66,7 @@ public class ResumeController {
      * @return
      */
     @GetMapping(value = "/query")
-    public String queryResume(String openId, String level, String state) {
+    public Map<String,Object> queryResume(String openId, String level, String state) {
         Map<String,Object> retMap = new HashMap<>();
         Map<String, Object> retData = new HashMap<>();
         List<User> users = new ArrayList<>();
@@ -94,7 +94,7 @@ public class ResumeController {
         retMap.put(VariableKey.RETDATA, retData);
         retMap.put(VariableKey.RETCODE, RespCode.SUCCESS.getValue());
 
-        return JsonUtil.toJson(retMap);
+        return retMap;
     }
 
     /**
