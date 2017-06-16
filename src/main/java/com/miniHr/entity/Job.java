@@ -17,6 +17,7 @@ public class Job implements Serializable {
     private String jobSalary;
     private String gender;
     private String age;
+
     /**
      * 行业要求
      */
@@ -28,6 +29,14 @@ public class Job implements Serializable {
     private String creater;
     private Date updateDt;
     private String updater;
+
+    public Integer getWorktime() {
+        return worktime;
+    }
+
+    public void setWorktime(Integer worktime) {
+        this.worktime = worktime;
+    }
 
     public int getId() {
         return id;
@@ -91,14 +100,6 @@ public class Job implements Serializable {
 
     public void setIndustry(String industry) {
         this.industry = industry;
-    }
-
-    public int getWorktime() {
-        return worktime;
-    }
-
-    public void setWorktime(int worktime) {
-        this.worktime = worktime;
     }
 
     public String getEducation() {
