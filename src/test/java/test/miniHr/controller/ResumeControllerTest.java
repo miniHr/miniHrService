@@ -29,7 +29,7 @@ public class ResumeControllerTest extends BaseTest {
     @Test
     public void queryResume() throws Exception {
         String uri = "/resume/query";
-        MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.get(uri).param("openId","oCeMZ0S_N6N-ZlFQJg5WXk7hr0_U")
+        MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.get(uri).param("openId","oCeMZ0f0FuRIwSr8DpMw1fq_NsHE")
                 .param("level","2")
                 .param("state", "1").accept(MediaType.APPLICATION_JSON))
                 .andReturn();
