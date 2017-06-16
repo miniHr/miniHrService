@@ -34,7 +34,7 @@ public class BoothDaoImpl implements BoothDao {
 	@Override
 	public List<Booth> getBoothById(Integer id) {
 		String sql = "SELECT * FROM BOOTH_INFO WHERE ID=:id";
-		Map<String,String> paramMap = new HashMap<String,String>();
+		Map<String,String> paramMap = new HashMap<>();
 		paramMap.put("id", id.toString());
 		return template.query(sql, paramMap, CustomerRowMapper.newInstance(Booth.class));
 	}

@@ -60,21 +60,20 @@ public class JobDaoImpl implements JobDao {
         StringBuffer sql = new StringBuffer("select j.*,c.COMPANY_NAME, c.IMAGE  from JOB j left join COMPANY_INFO c on c.ID=j.COMPANY_ID where 1=1 ");
 
         /**年龄*/
-        if (!StringUtils.isEmpty(user.getAge())) {
+        /*if (!StringUtils.isEmpty(user.getAge())) {
             sql.append("and j.MINAGE <=:age and j.MAXAGE >=:age ");
-        }
+        }*/
         /**性别*/
-        if(!StringUtils.isEmpty(user.getSex())) {
+        /*if(!StringUtils.isEmpty(user.getSex())) {
             sql.append("and j.GENDER=:sex ");
-        }
+        }*/
         /**学历*/
-        if(!StringUtils.isEmpty(user.getEducation())) {
+        /*if(!StringUtils.isEmpty(user.getEducation())) {
             sql.append("and j.EDUCATION=:education ");
-        }
+        }*/
         /**行业*/
         if (!StringUtils.isEmpty(user.getIndustry()) && user.getIndustry().indexOf("应届") < 0 ) {
-            user.setIndustry("%" + user.getIndustry() + "%");
-            sql.append("and j.INDUSTRY like :industry ");
+            sql.append("and j.INDUSTRY =:industry ");
         }
 
         /**只能十条记录*/
