@@ -21,7 +21,7 @@ public class Job implements Serializable {
      * 行业要求
      */
     private String industry;
-    private int worktime;
+    private Integer worktime;
     private String education;
     private String major;
     private Date createDt;

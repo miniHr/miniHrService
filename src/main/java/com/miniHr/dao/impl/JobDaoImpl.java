@@ -8,11 +8,13 @@ import com.miniHr.entity.JobExt;
 import com.miniHr.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
+import org.springframework.jdbc.core.namedparam.EmptySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
 
 import java.util.List;
+import java.util.Random;
 
 /**
  * Job Dao层实现类
@@ -76,8 +78,12 @@ public class JobDaoImpl implements JobDao {
             sql.append("and j.INDUSTRY =:industry ");
         }
 
+        Integer count = namedParameterJdbcTemplate.queryForObject("select count(1) cou from JOB", new EmptySqlParameterSource(), Integer.class);
+        int temInt = count / 10 ==0 ? 1 : count / 10;
+        int limitStart = new Random().nextInt(temInt) * 10;
+
         /**只能十条记录*/
-        sql.append("limit 0,10 ");
+        sql.append("limit  ").append(limitStart).append(",").append(limitStart + 10);
 
         return namedParameterJdbcTemplate.query(sql.toString(), new BeanPropertySqlParameterSource(user), CustomerRowMapper.newInstance(JobExt.class));
     }
