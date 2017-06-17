@@ -11,8 +11,20 @@ public class JobExt extends Job {
     private String companyName;
 
     private String image;
+    
+    private Integer boothId;
+    
+    private String information; 
 
-    public String getCompanyName() {
+	public Integer getBoothId() {
+		return boothId;
+	}
+
+	public void setBoothId(Integer boothId) {
+		this.boothId = boothId;
+	}
+
+	public String getCompanyName() {
         return companyName;
     }
 
@@ -27,5 +39,12 @@ public class JobExt extends Job {
     public void setImage(String image) {
         this.image = image;
     }
+    
+    public String getInformation() {
+		return information;
+	}
 
+	public void setInformation(String information) {
+		this.information = information;
+	}
 }

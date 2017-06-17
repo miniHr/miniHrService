@@ -15,6 +15,8 @@ public class Company implements Serializable {
 	private String scale;
 	private String address;
 	private String welfare;
+	private String information;
+
 	/**
 	 * 联系人姓名
 	 */
@@ -72,6 +74,14 @@ public class Company implements Serializable {
 
 	public void setWelfare(String welfare) {
 		this.welfare = welfare;
+	}
+	
+	public String getInformation() {
+		return information;
+	}
+
+	public void setInformation(String information) {
+		this.information = information;
 	}
 
 	public String getName() {

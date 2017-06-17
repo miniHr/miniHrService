@@ -28,6 +28,7 @@ CREATE TABLE `COMPANY_INFO` (
   `WELFARE` varchar(64) default '' COMMENT '公司福利',
   `NAME` varchar(16) default '' COMMENT '联系人',
   `PHONE` varchar(16) NOT NULL default '' COMMENT '联系电话',
+  `INFORMATION` varchar(150) default '' COMMENT '公司简介',
   `BOOTH_ID` int(8) COMMENT '展位ID',
   `CREATE_DT` timestamp NULL default CURRENT_TIMESTAMP COMMENT '创建时间',
   `CREATER` varchar(19) default '' COMMENT '创建人',

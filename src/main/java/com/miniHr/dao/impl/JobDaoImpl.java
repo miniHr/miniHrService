@@ -59,7 +59,7 @@ public class JobDaoImpl implements JobDao {
      */
     @Override
     public List<JobExt> selectJobByUserInfo(User user) {
-        StringBuffer sql = new StringBuffer("select j.*,c.COMPANY_NAME, c.IMAGE  from JOB j left join COMPANY_INFO c on c.ID=j.COMPANY_ID where 1=1 ");
+        StringBuffer sql = new StringBuffer("select j.*,c.COMPANY_NAME, c.IMAGE,c.BOOTH_ID,c.INFORMATION from JOB j left join COMPANY_INFO c on c.ID=j.COMPANY_ID where 1=1 ");
 
         /**年龄*/
         /*if (!StringUtils.isEmpty(user.getAge())) {
