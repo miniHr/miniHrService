@@ -78,13 +78,6 @@ public class JobDaoImpl implements JobDao {
             sql.append("and j.INDUSTRY =:industry ");
         }
 
-        Integer count = namedParameterJdbcTemplate.queryForObject("select count(1) cou from JOB", new EmptySqlParameterSource(), Integer.class);
-        int temInt = count / 10 ==0 ? 1 : count / 10;
-        int limitStart = new Random().nextInt(temInt) * 10;
-
-        /**只能十条记录*/
-        sql.append("limit  ").append(limitStart).append(",").append(limitStart + 10);
-
         return namedParameterJdbcTemplate.query(sql.toString(), new BeanPropertySqlParameterSource(user), CustomerRowMapper.newInstance(JobExt.class));
     }
 }
