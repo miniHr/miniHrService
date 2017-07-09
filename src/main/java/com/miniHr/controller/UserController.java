@@ -20,34 +20,34 @@ public class UserController {
 	private static Logger log = LoggerFactory.getLogger(UserController.class);
 	@Autowired
 	private UserService userService;
-	
+
 	@RequestMapping("/user/query")
-	public Map<String,Object> queryById(String openId){
-		Map<String,Object> result = new HashMap<String,Object>();
-		
+	public Map<String, Object> queryById(String openId) {
+		Map<String, Object> result = new HashMap<String, Object>();
+
 		User user = new User();
 		user.setOpenId(openId);
-		try{
+		try {
 			result.put(VariableKey.RETDATA, userService.getUserById(user));
 			result.put(VariableKey.RETCODE, RespCode.SUCCESS.getValue());
-		}catch (Exception e){
+		} catch (Exception e) {
 			log.info("查询用户异常：" + e);
 			result.put(VariableKey.RETCODE, RespCode.FAIL.getValue());
 		}
 		return result;
 	}
-	
+
 	@RequestMapping("/user/insert")
-	public Map<String,Object> register(User user){
+	public Map<String, Object> register(User user) {
 		user.setLevel("1");
-		Map<String,Object> result = new HashMap<>();
+		Map<String, Object> result = new HashMap<>();
 		result.put(VariableKey.RETCODE, RespCode.FAIL.getValue());
-		
+
 		user = userService.addUser(user);
-		if(null != user.getId()){
+		if (null != user.getId()) {
 			result.put(VariableKey.RETDATA, user);
 			result.put(VariableKey.RETCODE, RespCode.SUCCESS.getValue());
-		}	
+		}
 		return result;
 	}
 
@@ -57,19 +57,17 @@ public class UserController {
 	 * @param openId
 	 * @param name
 	 * @param phone
-     * @return
-     */
+	 * @return
+	 */
 	@GetMapping(value = "/user/update")
-	public Map<String, String> update(String openId, String name, String phone) {
-		User user = new User();
-		user.setOpenId(openId);
-		user.setName(name);
-		user.setPhone(phone);
-
-		userService.modifyUserPhone(user);
-
-		Map<String,String> retMap = new HashMap<>();
-		retMap.put(VariableKey.RETCODE, RespCode.SUCCESS.getValue());
+	public Map<String, String> update(User user) {
+		int count = userService.updateUserInfo(user);
+		Map<String, String> retMap = new HashMap<>();
+		if (count == 1) {
+			retMap.put(VariableKey.RETCODE, RespCode.SUCCESS.getValue());
+		} else {
+			retMap.put(VariableKey.RETCODE, RespCode.FAIL.getValue());
+		}
 		return retMap;
 	}
 }

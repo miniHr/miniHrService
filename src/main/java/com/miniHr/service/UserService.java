@@ -10,6 +10,8 @@ public interface UserService {
 	
 	public User getUserById(User user);
 	
+	public int updateUserInfo(User user);
+	
 	public int modifyUserLevelByOpenId(User user);
 
 	/**

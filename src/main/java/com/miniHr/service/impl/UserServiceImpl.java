@@ -37,4 +37,8 @@ public class UserServiceImpl implements UserService {
 		userDao.updateUserPhone(user);
 	}
 
+	@Override
+	public int updateUserInfo(User user) {
+		return userDao.updateUserInfo(user);
+	}
 }
