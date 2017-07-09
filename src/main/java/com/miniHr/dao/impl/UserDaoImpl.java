@@ -50,7 +50,7 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public int updateUserInfo(User user) {
-		String sql="UPDATE USER_INFO SET SEX=:sex, NAME=:name, PHONE=:phone, AGE=:age, INDUSTRY=:industry,WORKTIME=:workTime, EDUCATION=:education, MAJOR:=major WHERE OPEN_ID=:openId";
+		String sql="UPDATE USER_INFO SET SEX=:sex, NAME=:name, PHONE=:phone, AGE=:age, INDUSTRY=:industry,WORKTIME=:workTime, EDUCATION=:education, MAJOR=:major WHERE OPEN_ID=:openId";
 		return template.update(sql, new BeanPropertySqlParameterSource(user));
 	}
 }
