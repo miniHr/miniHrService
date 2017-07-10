@@ -28,4 +28,11 @@ public interface CompanyService {
      * 为公司添加展位
      */
     int modifyBoothIdOfCompanyById(Company company);
+    
+    /**
+     * 分页查询公司
+     * @param limit
+     * @return
+     */
+    List<Company> findCompanyLimited(String limit);
 }

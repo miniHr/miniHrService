@@ -30,4 +30,11 @@ public interface CompanyDao {
 	
 	/**根据公司Id更新公司表中的展位信息*/
 	int updateBoothInfoOfCompanyById(Company company);
+	
+    /**
+     * 分页查询公司
+     * @param limit
+     * @return
+     */
+    List<Company> findCompanyLimited(String limit);
 }

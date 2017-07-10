@@ -62,4 +62,9 @@ public class CompanyServiceImpl implements CompanyService {
 	public int modifyBoothIdOfCompanyById(Company company) {
 		return companyDaoImpl.updateBoothInfoOfCompanyById(company);
 	}
+
+	@Override
+	public List<Company> findCompanyLimited(String limit) {
+		return companyDaoImpl.findCompanyLimited(limit);
+	}
 }

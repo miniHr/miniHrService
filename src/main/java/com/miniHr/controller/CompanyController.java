@@ -22,7 +22,7 @@ import com.miniHr.service.CompanyService;
 @RequestMapping(value = "/company")
 public class CompanyController {
 	private static Logger log = LoggerFactory.getLogger(CompanyController.class);
-	
+
 	@Autowired
 	private CompanyService companyServiceImpl;
 
@@ -33,27 +33,31 @@ public class CompanyController {
 	public String addCompanyInfo(CompanyExt companyExt) {
 		log.info("addCompanyInfo request param:{}", companyExt);
 		int resultKey = companyServiceImpl.insert(companyExt);
-		Map<String,Object> retMap = new HashMap<>();
+		Map<String, Object> retMap = new HashMap<>();
 		retMap.put(VariableKey.RETCODE, RespCode.SUCCESS.getValue());
 
 		Map<String, Object> retData = new HashMap<>();
-		retData.put("keyID",resultKey);
+		retData.put("keyID", resultKey);
 
-		retMap.put(VariableKey.RETDATA,retData);
+		retMap.put(VariableKey.RETDATA, retData);
 		return JsonUtil.toJson(retMap);
 	}
 
 	@GetMapping(value = "/query")
-	public String queryCompanyInfo(String id){
+	public String queryCompanyInfo(String id) {
 		Company company = companyServiceImpl.selectCompanyInfo(Integer.parseInt(id));
 
 		List<Job> jobs = jobServiceImpl.findByCompanyId(company);
 
-		Map<String,Object> retMap = new HashMap<>();
+		Map<String, Object> retMap = new HashMap<>();
 		retMap.put(VariableKey.RETCODE, company == null ? RespCode.FAIL.getValue() : RespCode.SUCCESS.getValue());
 		retMap.put(VariableKey.RETDATA, company);
 		retMap.put(VariableKey.RETDATA_TWO, jobs);
 		return JsonUtil.toJson(retMap);
 	}
-	
+
+	@GetMapping(value = "/query/limit")
+	public String queryCompanyInfoLimited(String limit) {
+		return JsonUtil.toJson(companyServiceImpl.findCompanyLimited(limit));
+	}
 }
