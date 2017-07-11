@@ -17,57 +17,57 @@ import com.miniHr.service.UserService;
 
 @RestController
 public class UserController {
-	private static Logger log = LoggerFactory.getLogger(UserController.class);
-	@Autowired
-	private UserService userService;
+    private static Logger log = LoggerFactory.getLogger(UserController.class);
+    @Autowired
+    private UserService userService;
 
-	@RequestMapping("/user/query")
-	public Map<String, Object> queryById(String openId) {
-		Map<String, Object> result = new HashMap<String, Object>();
+    @RequestMapping("/user/query")
+    public Map<String, Object> queryById(String openId) {
+        Map<String, Object> result = new HashMap<String, Object>();
 
-		User user = new User();
-		user.setOpenId(openId);
-		try {
-			result.put(VariableKey.RETDATA, userService.getUserById(user));
-			result.put(VariableKey.RETCODE, RespCode.SUCCESS.getValue());
-		} catch (Exception e) {
-			log.info("查询用户异常：" + e);
-			result.put(VariableKey.RETCODE, RespCode.FAIL.getValue());
-		}
-		return result;
-	}
+        User user = new User();
+        user.setOpenId(openId);
+        user = userService.getUserById(user);
+        if (null == user) {
+            log.info("无此用户：" + openId);
+            result.put(VariableKey.RETCODE, RespCode.FAIL.getValue());
+        } else {
+            result.put(VariableKey.RETDATA, user);
+            result.put(VariableKey.RETCODE, RespCode.SUCCESS.getValue());
+        }
+        return result;
+    }
 
-	@RequestMapping("/user/insert")
-	public Map<String, Object> register(User user) {
-		user.setLevel("1");
-		Map<String, Object> result = new HashMap<>();
-		result.put(VariableKey.RETCODE, RespCode.FAIL.getValue());
+    @RequestMapping("/user/insert")
+    public Map<String, Object> register(User user) {
+        user.setLevel("1");
+        Map<String, Object> result = new HashMap<>();
+        result.put(VariableKey.RETCODE, RespCode.FAIL.getValue());
 
-		user = userService.addUser(user);
-		if (null != user.getId()) {
-			result.put(VariableKey.RETDATA, user);
-			result.put(VariableKey.RETCODE, RespCode.SUCCESS.getValue());
-		}
-		return result;
-	}
+        user = userService.addUser(user);
+        if (null != user.getId()) {
+            result.put(VariableKey.RETDATA, user);
+            result.put(VariableKey.RETCODE, RespCode.SUCCESS.getValue());
+        }
+        return result;
+    }
 
-	/**
-	 * 更新用户信息
-	 *
-	 * @param openId
-	 * @param name
-	 * @param phone
-	 * @return
-	 */
-	@GetMapping(value = "/user/update")
-	public Map<String, String> update(User user) {
-		int count = userService.updateUserInfo(user);
-		Map<String, String> retMap = new HashMap<>();
-		if (count == 1) {
-			retMap.put(VariableKey.RETCODE, RespCode.SUCCESS.getValue());
-		} else {
-			retMap.put(VariableKey.RETCODE, RespCode.FAIL.getValue());
-		}
-		return retMap;
-	}
+    /**
+     * 更新用户信息
+     * @param openId
+     * @param name
+     * @param phone
+     * @return
+     */
+    @GetMapping(value = "/user/update")
+    public Map<String, String> update(User user) {
+        int count = userService.updateUserInfo(user);
+        Map<String, String> retMap = new HashMap<>();
+        if (count == 1) {
+            retMap.put(VariableKey.RETCODE, RespCode.SUCCESS.getValue());
+        } else {
+            retMap.put(VariableKey.RETCODE, RespCode.FAIL.getValue());
+        }
+        return retMap;
+    }
 }

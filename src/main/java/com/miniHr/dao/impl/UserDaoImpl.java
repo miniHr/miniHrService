@@ -1,5 +1,7 @@
 package com.miniHr.dao.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -15,11 +17,17 @@ import com.miniHr.entity.User;
 public class UserDaoImpl implements UserDao {
     @Autowired
     private NamedParameterJdbcTemplate template;
-    
+
     @Override
     public User getUserById(User user) {
         String sql = "SELECT * FROM USER_INFO WHERE OPEN_ID=:openId";
-        return template.queryForObject(sql, new BeanPropertySqlParameterSource(user), CustomerRowMapper.newInstance(User.class));
+        List<User> list = template.query(sql, new BeanPropertySqlParameterSource(user),
+            CustomerRowMapper.newInstance(User.class));
+        if (list.size() < 1) {
+            return null;
+        } else {
+            return list.get(0);
+        }
     }
 
     @Override
@@ -39,7 +47,6 @@ public class UserDaoImpl implements UserDao {
 
     /**
      * 更新用户信息
-     *
      * @param user
      */
     @Override
@@ -48,9 +55,9 @@ public class UserDaoImpl implements UserDao {
         template.update(sql, new BeanPropertySqlParameterSource(user));
     }
 
-	@Override
-	public int updateUserInfo(User user) {
-		String sql="UPDATE USER_INFO SET SEX=:sex, NAME=:name, PHONE=:phone, AGE=:age, INDUSTRY=:industry,WORKTIME=:workTime, EDUCATION=:education, MAJOR=:major WHERE OPEN_ID=:openId";
-		return template.update(sql, new BeanPropertySqlParameterSource(user));
-	}
+    @Override
+    public int updateUserInfo(User user) {
+        String sql = "UPDATE USER_INFO SET SEX=:sex, NAME=:name, PHONE=:phone, AGE=:age, INDUSTRY=:industry,WORKTIME=:workTime, EDUCATION=:education, MAJOR=:major WHERE OPEN_ID=:openId";
+        return template.update(sql, new BeanPropertySqlParameterSource(user));
+    }
 }
