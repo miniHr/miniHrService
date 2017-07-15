@@ -58,7 +58,8 @@ public class ResumeDaoImpl implements ResumeDao {
     @Override
     public List<User> selectByCompanyUser(Resume resume) {
 //        String sql = "select u.* from USER_INFO u where OPEN_ID IN (select r.OPENID from RESUME r where r.COMPANY_ID=:companyId and r.state=:state AND r.OPENID !=:openid)";
-        String sql = "select u.*,r.ID from USER_INFO u LEFT JOIN RESUME r ON u.OPEN_ID = r.OPENID WHERE r.COMPANY_ID=:companyId and r.state=:state AND r.OPENID !=:openid  ";
+        String sql = "select DISTINCT(u.ID), u.OPEN_ID,u.SEX,u.`NAME`,u.PHONE,u.AGE,u.INDUSTRY,u.WORKTIME,u.EDUCATION,u.MAJOR,u.`LEVEL`,u.COMPANY_ID,u.CREATE_DT,u.CREATEER,u.UPDATE_DT,u.UPDATER " +
+                "from USER_INFO u LEFT JOIN RESUME r ON u.OPEN_ID = r.OPENID WHERE r.COMPANY_ID=:companyId and r.state=:state AND r.OPENID !=:openid  ";
         return namedParameterJdbcTemplate.query(sql, new BeanPropertySqlParameterSource(resume), CustomerRowMapper.newInstance(User.class));
     }
 
