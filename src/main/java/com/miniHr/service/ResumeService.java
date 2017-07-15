@@ -16,7 +16,7 @@ public interface ResumeService {
      * 1.新增简历授权
      *
      * @param resumeVo
-     * @return
+     * @return booth id
      */
     int addResumeInfo(ResumeVo resumeVo);
 

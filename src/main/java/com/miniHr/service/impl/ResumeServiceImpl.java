@@ -1,14 +1,17 @@
 package com.miniHr.service.impl;
 
 import com.miniHr.comm.ResumeLevel;
+import com.miniHr.dao.CompanyDao;
 import com.miniHr.dao.JobDao;
 import com.miniHr.dao.ResumeDao;
+import com.miniHr.entity.Company;
 import com.miniHr.entity.Job;
 import com.miniHr.entity.Resume;
 import com.miniHr.entity.User;
 import com.miniHr.service.ResumeService;
 import com.miniHr.vo.ResumeVo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -28,11 +31,15 @@ public class ResumeServiceImpl implements ResumeService {
     @Autowired
     private ResumeDao resumeDaoImpl;
 
+    @Autowired
+    @Qualifier("companyDao")
+    private CompanyDao companyDaoImpl;
+
     /**
      * 1.新增简历授权
      *
      * @param resumeVo
-     * @return
+     * @return booth id
      */
     @Override
     @Transactional(rollbackFor = Exception.class)
@@ -46,7 +53,12 @@ public class ResumeServiceImpl implements ResumeService {
         resume.setOpenid(resumeVo.getOpenId());
         resume.setCompanyId(job.getCompanyId());
         resume.setState(ResumeLevel.Processing.getLevel());
-        return resumeDaoImpl.insert(resume);
+        if (resumeDaoImpl.insert(resume) <= 0) {
+            throw new RuntimeException("resume fails to insert into table.");
+        }
+
+        Company company = companyDaoImpl.selectCompanyInfoById(job.getCompanyId());
+        return company.getBoothId();
     }
 
     /**

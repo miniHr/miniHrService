@@ -38,6 +38,12 @@ public class ResumeController {
 
     private static Logger log = LoggerFactory.getLogger(ResumeController.class);
 
+    /**
+     * add resume
+     * @param openId
+     * @param jobId
+     * @return
+     */
     @GetMapping(value = "/insert")
     public String resume(String openId, int jobId) {
         log.info("openId = {}, jobId = {}", openId, jobId);
@@ -45,13 +51,13 @@ public class ResumeController {
         ResumeVo resumeVo = new ResumeVo();
         resumeVo.setOpenId(openId);
         resumeVo.setJobId(jobId);
-        int resumeId = resumeServiceImpl.addResumeInfo(resumeVo);
+        int boothId = resumeServiceImpl.addResumeInfo(resumeVo);
 
         Map<String,Object> retMap = new HashMap<>();
         retMap.put(VariableKey.RETCODE, RespCode.SUCCESS.getValue());
 
         Map<String, Object> retData = new HashMap<>();
-        retData.put("keyID",resumeId);
+        retData.put(VariableKey.KEY_ID, boothId);
 
         retMap.put(VariableKey.RETDATA,retData);
         return JsonUtil.toJson(retMap);

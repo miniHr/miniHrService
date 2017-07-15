@@ -16,7 +16,7 @@ public class ResumeControllerTest extends BaseTest {
         String uri = "/resume/insert";
         MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.get(uri)
                 .param("openId","11")
-                .param("jobId","1")
+                .param("jobId","2")
                 .accept(MediaType.APPLICATION_JSON))
                 .andReturn();
 

@@ -7,4 +7,6 @@ public class VariableKey {
 	public static final String LISTINFOS = "listInfos";
 
 	public static final String RETDATA_TWO = "retDataTwo";
+
+	public static final String KEY_ID = "keyID";
 }
