@@ -22,6 +22,10 @@ public class User implements Serializable {
 	private String major; // 专业
 	private String level; // 用户等级 1普通用户 2企业用户
 	private Integer companyId; // 公司id
+	private String expectedJob; //期望的工作类型
+	private String expectedBase;//期望的工作地点
+	private String acceptOut;//是否接受外出
+	private String channel;//获得职位的渠道
 	private Date createDt;
 	private String creater;
 	private Date updateDt;
@@ -153,6 +157,38 @@ public class User implements Serializable {
 
 	public void setUpdater(String updater) {
 		this.updater = updater;
+	}
+
+	public String getExpectedJob() {
+		return expectedJob;
+	}
+
+	public void setExpectedJob(String expectedJob) {
+		this.expectedJob = expectedJob;
+	}
+
+	public String getExpectedBase() {
+		return expectedBase;
+	}
+
+	public void setExpectedBase(String expectedBase) {
+		this.expectedBase = expectedBase;
+	}
+
+	public String getAcceptOut() {
+		return acceptOut;
+	}
+
+	public void setAcceptOut(String acceptOut) {
+		this.acceptOut = acceptOut;
+	}
+
+	public String getChannel() {
+		return channel;
+	}
+
+	public void setChannel(String channel) {
+		this.channel = channel;
 	}
 
 }
