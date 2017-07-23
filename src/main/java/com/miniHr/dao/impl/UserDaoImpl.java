@@ -32,7 +32,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public User addUser(User user) {
-        String sql = "INSERT INTO USER_INFO(OPEN_ID,SEX,NAME,PHONE,AGE,INDUSTRY,WORKTIME,EDUCATION,MAJOR,LEVEL,COMPANY_ID,EXPECTED_JOB,EXPECTED_BASE,ACCEPTED_OUT,CHANNEL,UPDATE_DT) VALUES(:openId,:sex,:name,:phone,:age,:industry,:workTime,:education,:major,:level,:companyId,:expectedJob,:expectedBase,:acceptOut,:channel,CURRENT_TIMESTAMP)";
+        String sql = "INSERT INTO USER_INFO(OPEN_ID,SEX,NAME,PHONE,AGE,INDUSTRY,WORKTIME,EDUCATION,MAJOR,LEVEL,COMPANY_ID,EXPECTED_JOB,EXPECTED_BASE,ACCEPT_OUT,CHANNEL,UPDATE_DT) VALUES(:openId,:sex,:name,:phone,:age,:industry,:workTime,:education,:major,:level,:companyId,:expectedJob,:expectedBase,:acceptOut,:channel,CURRENT_TIMESTAMP)";
         KeyHolder holder = new GeneratedKeyHolder();
         template.update(sql, new BeanPropertySqlParameterSource(user), holder);
         user.setId(holder.getKey().intValue());
@@ -57,7 +57,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public int updateUserInfo(User user) {
-        String sql = "UPDATE USER_INFO SET SEX=:sex, NAME=:name, PHONE=:phone, AGE=:age, INDUSTRY=:industry,WORKTIME=:workTime, EDUCATION=:education, MAJOR=:major,EXPECTED_JOB=:expectedJob,EXPECTED_BASE=:expectedBase,ACCEPTED_OUT=:acceptOut,CHANNEL=:channel WHERE OPEN_ID=:openId";
+        String sql = "UPDATE USER_INFO SET SEX=:sex, NAME=:name, PHONE=:phone, AGE=:age, INDUSTRY=:industry,WORKTIME=:workTime, EDUCATION=:education, MAJOR=:major,EXPECTED_JOB=:expectedJob,EXPECTED_BASE=:expectedBase,ACCEPT_OUT=:acceptOut,CHANNEL=:channel WHERE OPEN_ID=:openId";
         return template.update(sql, new BeanPropertySqlParameterSource(user));
     }
 }

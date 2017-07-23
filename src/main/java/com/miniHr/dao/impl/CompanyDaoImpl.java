@@ -75,7 +75,7 @@ public class CompanyDaoImpl implements CompanyDao {
 	@Override
 	public List<Company> findCompanyLimited(String limit) {
 		String sql = "SELECT ID,COMPANY_NAME,IMAGE,SCALE,ADDRESS,WELFARE,NAME,PHONE,INFORMATION,BOOTH_ID FROM COMPANY_INFO LIMIT "
-				+ limit + ",5";
+				+ limit + ",8";
 		return template.query(sql, CustomerRowMapper.newInstance(Company.class));
 	}
 
