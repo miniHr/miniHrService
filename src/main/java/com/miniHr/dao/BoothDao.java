@@ -3,12 +3,15 @@ package com.miniHr.dao;
 import java.util.List;
 
 import com.miniHr.entity.Booth;
+import com.miniHr.entity.BoothExt;
 import com.miniHr.vo.BoothVo;
 
 public interface BoothDao {
 	
 	/**获取所有展位*/
 	public List<Booth> queryAllBooth();
+	
+	public List<BoothExt> getAllBoothWithCompanyName();
 	
 	/**根据展位id更新展位信息*/
 	public int updateBoothInfo(Booth booth);
