@@ -28,7 +28,7 @@ public class CompanyDaoImpl implements CompanyDao {
 	public int addCompany(Company company) {
 		// String sql = "insert into company(name, job,position,type)
 		// values(:name,:job,:position,:type)";
-		String sql = "insert into COMPANY_INFO(COMPANY_NAME, IMAGE,SCALE,ADDRESS,WELFARE,NAME,PHONE,BOOTH_ID,CREATE_DT,CREATER,UPDATE_DT,UPDATER) values(:companyName,:image,:scale,:address,:welfare,:name,:phone,:boothId,sysdate(),'creater',sysdate(),'updater')";
+		String sql = "insert into COMPANY_INFO(COMPANY_NAME, IMAGE,SCALE,ADDRESS,WELFARE,NAME,PHONE,BOOTH_ID,CREATE_DT,CREATER,UPDATE_DT,UPDATER,AUTH_CODE) values(:companyName,:image,:scale,:address,:welfare,:name,:phone,:boothId,sysdate(),'creater',sysdate(),'updater',:authCode)";
 		KeyHolder holder = new GeneratedKeyHolder();
 		template.update(sql, new BeanPropertySqlParameterSource(company), holder);
 		return holder.getKey().intValue();
@@ -45,7 +45,7 @@ public class CompanyDaoImpl implements CompanyDao {
 
 	@Override
 	public void deleteById(int id) {
-		String sql = "delete from company where id=:id";
+		String sql = "DELETE from COMPANY_INFO where id=:id";
 		Company company = new Company();
 		company.setId(id);
 		template.update(sql, new BeanPropertySqlParameterSource(company));

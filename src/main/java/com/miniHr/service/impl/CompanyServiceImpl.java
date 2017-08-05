@@ -37,6 +37,8 @@ public class CompanyServiceImpl implements CompanyService {
     @Override
     @Transactional
     public int insert(CompanyExt companyExt) {
+        String authCode=String.valueOf(System.currentTimeMillis()).substring(7);
+        companyExt.setAuthCode(authCode);
         int companyId = companyDaoImpl.addCompany(companyExt);
 
         User user = new User();

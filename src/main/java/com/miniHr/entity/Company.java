@@ -23,6 +23,7 @@ public class Company implements Serializable {
 	private String name;
 	private String phone;
 	private Integer boothId;
+	private String authCode;
 	private Date createDt;
 	private String creater;
 	private Date updateDt;
@@ -138,6 +139,14 @@ public class Company implements Serializable {
 
 	public void setUpdater(String updater) {
 		this.updater = updater;
+	}
+
+	public String getAuthCode() {
+		return authCode;
+	}
+
+	public void setAuthCode(String authCode) {
+		this.authCode = authCode;
 	}
 
 	@Override
