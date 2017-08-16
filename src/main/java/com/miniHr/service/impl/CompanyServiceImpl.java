@@ -3,6 +3,8 @@ package com.miniHr.service.impl;
 import java.util.List;
 
 import com.miniHr.dao.UserDao;
+import com.miniHr.dao.impl.BoothDaoImpl;
+import com.miniHr.entity.Booth;
 import com.miniHr.entity.CompanyExt;
 import com.miniHr.entity.User;
 
@@ -29,6 +31,10 @@ public class CompanyServiceImpl implements CompanyService {
     @Qualifier("userDao")
     private UserDao userdaoImpl;
 
+    @Autowired
+    @Qualifier("boothDao")
+    private BoothDaoImpl boothDaoImpl;
+
     /**
      * 添加一个企业信息
      * @param companyExt
@@ -41,12 +47,16 @@ public class CompanyServiceImpl implements CompanyService {
         companyExt.setAuthCode(authCode);
         int companyId = companyDaoImpl.addCompany(companyExt);
 
-        User user = new User();
-        user.setOpenId(companyExt.getOpenId());
-        user.setLevel(UserLevel.UNPAYED_COMPANY_USER.getLevel());
-        user.setCompanyId(companyId);
-        userdaoImpl.addUser(user);
-
+//        User user = new User();
+//        user.setOpenId(companyExt.getOpenId());
+//        user.setLevel(UserLevel.UNPAYED_COMPANY_USER.getLevel());
+//        user.setCompanyId(companyId);
+//        userdaoImpl.addUser(user);
+        Booth booth=new Booth();
+        booth.setId(companyExt.getBoothId());
+        booth.setCompanyId(companyId);
+        booth.setState("3");
+        boothDaoImpl.updateBoothInfo(booth);
         return companyId;
     }
 
