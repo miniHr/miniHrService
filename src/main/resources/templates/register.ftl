@@ -26,7 +26,7 @@
             <span class="small">公司联系电话</span>
         </label>
         <input type="text" name="phone" id="phone"/>
-        <button type="submit">提交</button>
+        <button type="submit" style="background-color: aqua">提交</button>
         <div class="spacer"></div>
     </form>
 </div>
