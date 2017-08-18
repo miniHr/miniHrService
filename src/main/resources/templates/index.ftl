@@ -10,12 +10,37 @@
             line-height: 18px;
             font-size: 15px;
         }
+        .d1{
+            text-align:center;
+            margin:0 auto;
+        }
+
+        .d2{
+            text-align: center;
+            margin:0 auto;
+        }
+
+        .d3{
+            text-align: center;
+            margin:0 auto;
+            color: #DB7093;
+        }
     </style>
     <script type="text/javascript">
 
     </script>
 </head>
 <body>
+    <div class="d1">
+        微信小程序智诚工作人员专用页面
+    </div>
+    <div class="d2">
+        本页面可以实现智能招聘会小程序展位的占用和撤销功能，小程序中企业HR占用的展位会即时在此页面中显示。 
+        登录码为预留功能，暂不使用。请勿将该页面链接泄露给展位负责以外的无关人员。
+    </div>
+    <div class="d3">
+        注意： 每次操作占位前请刷新网页，避免因延迟造成的误占用
+    </div>
     <table
             style="text-align: center; FONT-SIZE: 11pt; WIDTH: 600px; FONT-FAMILY: 宋体; BORDER-COLLAPSE: collapse"
             borderColor=#3399ff cellSpacing=0 cellPadding=0 align=center border=1>
