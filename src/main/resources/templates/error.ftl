@@ -5,6 +5,6 @@
     <title>ERROR</title>
 </head>
 <body>
-    <div>${retData}</div>
+    <div>${retData?if_exists}</div>
 </body>
 </html>
