@@ -3,6 +3,8 @@ package com.miniHr.dao;
 import java.util.List;
 
 import com.miniHr.entity.Company;
+import com.miniHr.entity.User;
+import com.miniHr.entity.UserExt;
 
 public interface CompanyDao {
 	/**
@@ -37,4 +39,18 @@ public interface CompanyDao {
      * @return
      */
     List<Company> findCompanyLimited(String limit);
+
+	/**
+	 * 通过登录码查找公司
+	 * @param company
+	 * @return
+	 */
+	Company findCompanyByAuthCode(Company company);
+
+	/**
+	 * 根据企业方查找全简历
+	 * @param company
+	 * @return
+	 */
+	List<UserExt> findUserByResume(Company company);
 }

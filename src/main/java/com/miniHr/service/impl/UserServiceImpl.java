@@ -7,6 +7,8 @@ import com.miniHr.dao.UserDao;
 import com.miniHr.entity.User;
 import com.miniHr.service.UserService;
 
+import java.util.List;
+
 @Service("userService")
 public class UserServiceImpl implements UserService {
 	@Autowired
@@ -35,6 +37,11 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public void modifyUserPhone(User user) {
 		userDao.updateUserPhone(user);
+	}
+
+	@Override
+	public List<User> findAllUser() {
+		return userDao.findAllUser();
 	}
 
 	@Override

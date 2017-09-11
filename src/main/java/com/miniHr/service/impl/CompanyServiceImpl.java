@@ -4,9 +4,7 @@ import java.util.List;
 
 import com.miniHr.dao.UserDao;
 import com.miniHr.dao.impl.BoothDaoImpl;
-import com.miniHr.entity.Booth;
-import com.miniHr.entity.CompanyExt;
-import com.miniHr.entity.User;
+import com.miniHr.entity.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -14,7 +12,6 @@ import org.springframework.stereotype.Service;
 
 import com.miniHr.comm.UserLevel;
 import com.miniHr.dao.CompanyDao;
-import com.miniHr.entity.Company;
 import com.miniHr.service.CompanyService;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -79,4 +76,14 @@ public class CompanyServiceImpl implements CompanyService {
 	public List<Company> findCompanyLimited(String limit) {
 		return companyDaoImpl.findCompanyLimited(limit);
 	}
+
+    @Override
+    public Company findCompanyByAuthCode(Company company) {
+        return companyDaoImpl.findCompanyByAuthCode(company);
+    }
+
+    @Override
+    public List<UserExt> findUserByResume(Company company) {
+        return companyDaoImpl.findUserByResume(company);
+    }
 }

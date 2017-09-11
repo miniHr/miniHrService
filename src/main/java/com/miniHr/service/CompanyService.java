@@ -4,6 +4,8 @@ import java.util.List;
 
 import com.miniHr.entity.Company;
 import com.miniHr.entity.CompanyExt;
+import com.miniHr.entity.User;
+import com.miniHr.entity.UserExt;
 
 /**
  * 企业信息服务接口类
@@ -35,4 +37,13 @@ public interface CompanyService {
      * @return
      */
     List<Company> findCompanyLimited(String limit);
+
+    /**
+     * 通过登录码查找公司
+     * @param company
+     * @return
+     */
+    Company findCompanyByAuthCode(Company company);
+
+    List<UserExt> findUserByResume(Company company);
 }

@@ -2,6 +2,8 @@ package com.miniHr.service;
 
 import com.miniHr.entity.User;
 
+import java.util.List;
+
 /**
  * 用户服务表
  */
@@ -20,4 +22,10 @@ public interface UserService {
 	 * @param user
      */
 	void modifyUserPhone(User user);
+
+	/**
+	 * 查找所有用户
+	 * @return
+	 */
+	List<User> findAllUser();
 }

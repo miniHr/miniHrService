@@ -22,7 +22,7 @@ public class UserDaoImpl implements UserDao {
     public User getUserById(User user) {
         String sql = "SELECT * FROM USER_INFO WHERE OPEN_ID=:openId";
         List<User> list = template.query(sql, new BeanPropertySqlParameterSource(user),
-            CustomerRowMapper.newInstance(User.class));
+                CustomerRowMapper.newInstance(User.class));
         if (list.size() < 1) {
             return null;
         } else {
@@ -47,12 +47,19 @@ public class UserDaoImpl implements UserDao {
 
     /**
      * 更新用户信息
+     *
      * @param user
      */
     @Override
     public void updateUserPhone(User user) {
         String sql = "UPDATE USER_INFO SET NAME=:name, PHONE=:phone WHERE OPEN_ID=:openId";
         template.update(sql, new BeanPropertySqlParameterSource(user));
+    }
+
+    @Override
+    public List<User> findAllUser() {
+        String sql = "SELECT * FROM USER_INFO";
+        return template.query(sql, CustomerRowMapper.newInstance(User.class));
     }
 
     @Override

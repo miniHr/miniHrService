@@ -2,6 +2,8 @@ package com.miniHr.dao;
 
 import com.miniHr.entity.User;
 
+import java.util.List;
+
 public interface UserDao {
 	/**根据用户id获取用户信息*/
 	public User getUserById(User user);
@@ -21,4 +23,10 @@ public interface UserDao {
 	 * @param user
      */
 	void updateUserPhone(User user);
+
+    /**
+     * 查找所有简历
+     * @return
+     */
+	List<User> findAllUser();
 }
