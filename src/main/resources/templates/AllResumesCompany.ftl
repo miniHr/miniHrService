@@ -3,6 +3,11 @@
 <head>
     <meta charset="utf-8">
     <title>所有简历信息</title>
+    <style >
+        td{
+            height:50px;
+        }
+    </style>
 </head>
 <body>
 <h1 style="text-align: center;margin: 0 auto;">智诚人力招聘会小程序简历企业专供页面</h1>

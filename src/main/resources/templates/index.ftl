@@ -26,6 +26,9 @@
             margin: 0 auto;
             color: #DB7093;
         }
+        td{
+            height:50px;
+        }
     </style>
     <script type="text/javascript">
 
@@ -33,7 +36,7 @@
 </head>
 <body>
 <div class="d1">
-    微信小程序智诚工作人员专用页面
+    <h1>微信小程序智诚工作人员专用页面</h1>
 </div>
 <div class="d2">
     本页面可以实现智能招聘会小程序展位的占用和撤销功能，小程序中企业HR占用的展位会即时在此页面中显示。 
@@ -62,7 +65,7 @@
         <td><#if (booth.state=='1')>可购买<#else>已被占用</#if></td>
         <td>${booth.name?if_exists}</td>
         <td>${booth.phone?if_exists}</td>
-        <td>${booth.authCode?if_exists}</td>
+        <td><a href="https://561job.cn/resumeInfo/resumeOfCompany?authCode=${booth.authCode?if_exists}">${booth.authCode?if_exists}</a></td>
         <td><input type="submit" name="operation" class="btn" value="占用"
                    <#if (booth.state!='1')>disabled="disabled"</#if>
                    onclick="window.location.href='occupy?id=${booth.id}'"/>

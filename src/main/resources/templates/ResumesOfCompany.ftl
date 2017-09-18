@@ -3,9 +3,15 @@
 <head>
     <meta charset="utf-8">
     <title>所有简历信息</title>
+    <style >
+        td{
+            height:50px;
+        }
+    </style>
 </head>
 <body>
 <div style="text-align: center;margin: 0 auto;"><h1>智诚人力招聘会</h1></div>
+<div style="text-align: center;margin: 0 auto;"><h1>${companyName}</h1></div>
 <div style="text-align: center;margin: 0 auto;"><h4>企业专用页面</h4></div>
 <a style="display:block; text-align:center;margin-bottom:2%" href="https://561job.cn/resumeInfo/allWithoutPhone?authCode=${authCode?if_exists}">点击查看本次招聘会全部投递简历</a>
 

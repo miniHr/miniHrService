@@ -3,6 +3,11 @@
 <head>
     <meta charset="utf-8">
     <title>所有简历信息</title>
+    <style >
+        td{
+            height:50px;
+        }
+    </style>
 </head>
 <body>
 <h1 style="text-align: center;margin: 0 auto;">招聘会小程序入场简历全列表</h1>

@@ -83,7 +83,7 @@ public class CompanyDaoImpl implements CompanyDao {
 
     @Override
     public Company findCompanyByAuthCode(Company company) {
-        String sql = "SELECT ID FROM COMPANY_INFO WHERE AUTH_CODE=:authCode";
+        String sql = "SELECT ID,COMPANY_NAME FROM COMPANY_INFO WHERE AUTH_CODE=:authCode";
         List<Company> list = template.query(sql, new BeanPropertySqlParameterSource(company), CustomerRowMapper.newInstance(Company.class));
         if (list.size() < 1) {
             return null;

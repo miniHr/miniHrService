@@ -69,6 +69,7 @@ public class ResumeQueryController {
         } else {
             res.put("resumes", companyService.findUserByResume(c));
             res.put("authCode",authCode);
+            res.put("companyName",c.getCompanyName());
             return "ResumesOfCompany";
         }
     }
