@@ -26,6 +26,10 @@
             margin: 0 auto;
             color: #DB7093;
         }
+        .d4{
+            text-align: center;
+            margin: 0 auto;
+        }
         td{
             height:50px;
         }
@@ -40,11 +44,17 @@
 </div>
 <div class="d2">
     本页面可以实现智能招聘会小程序展位的占用和撤销功能，小程序中企业HR占用的展位会即时在此页面中显示。 
-    登录码为预留功能，暂不使用。请勿将该页面链接泄露给展位负责以外的无关人员。
+    点击登陆码栏的链接即可打开对应的公司收看简历页面
 </div>
 <div class="d3">
     注意： 每次操作占位前请刷新网页，避免因延迟造成的误占用
 </div>
+<br/>
+<div class="d4">
+    查看招聘会场内全部入场简历（有电话号码，自己使用，不可泄露）
+    <br/><a href="https://561job.cn/resumeInfo/queryAll">https://561job.cn/resumeInfo/queryAll</a>
+</div>
+<br/>
 <table style="text-align: center; font-size: 11pt; width: 1000px; font-family: 宋体; border-collapse: collapse"
        borderColor=#3399ff cellSpacing=0 cellPadding=0 align=center border=1>
     <tr>
