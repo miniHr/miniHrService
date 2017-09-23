@@ -28,7 +28,7 @@
         <td><b>是否接受外地</b></td>
     </tr>
 <#list resumes as resume>
-    <tr style="border: 3;>
+    <tr style="border: 3px;">
         <td><b>${resume.id?c}</b></td>
         <td><b>${resume.name}</b></td>
         <td><b>${resume.age}</b></td>

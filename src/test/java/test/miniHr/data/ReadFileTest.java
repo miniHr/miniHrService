@@ -13,8 +13,8 @@ import org.apache.poi.ss.usermodel.WorkbookFactory;
 public class ReadFileTest {
     public static void main(String[] args) {
         try {
-            jobData("D:/data.xlsx");
-            companyData("D:/data.xlsx");
+            jobData("/app/company.xlsx");
+            //companyData("/app/company.xlsx");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -58,7 +58,7 @@ public class ReadFileTest {
                 sb.append(sb2);
             }
         }
-        FileWriter writer = new FileWriter("D:/company_info.sql");
+        FileWriter writer = new FileWriter("/app/company_info.sql");
         writer.write(sb.toString());
         writer.close();
         bean.close();
@@ -74,7 +74,7 @@ public class ReadFileTest {
             StringBuilder sb2 = new StringBuilder(
                 "insert into JOB(company_id,JOB_NAME,INDUSTRY,JOB_SALARY,JOB_DETAIL) values(");
             if ((row = sheet.getRow(i)) != null) {
-                for (int j = 0; j < row.getLastCellNum(); j++) {
+                for (int j = 0; j < 5; j++) {
                     String value = null;
                     Cell cell = row.getCell(j);
                     if (cell == null || Cell.CELL_TYPE_BLANK == cell.getCellType()) {
@@ -102,7 +102,7 @@ public class ReadFileTest {
                 sb.append(sb2);
             }
         }
-        FileWriter writer = new FileWriter("D:/job.sql");
+        FileWriter writer = new FileWriter("/app/job.sql");
         writer.write(sb.toString());
         writer.close();
         bean.close();
