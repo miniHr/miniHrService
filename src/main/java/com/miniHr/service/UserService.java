@@ -28,4 +28,20 @@ public interface UserService {
 	 * @return
 	 */
 	List<User> findAllUser();
+
+	/**
+	 * 按照日期时间选择
+	 * @param begin
+	 * @param end
+	 * @return
+	 */
+	List<User> findUserByDate(String begin, String end);
+
+	/**
+	 * 根据时间删除简历
+	 * @param begin
+	 * @param end
+	 * @return
+	 */
+	int deleteUserByDate(String begin,String end);
 }

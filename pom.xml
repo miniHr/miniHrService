@@ -110,5 +110,10 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-freemarker</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>com.qcloud</groupId>
+			<artifactId>cos_api</artifactId>
+			<version>4.4</version>
+		</dependency>
 	</dependencies>
 </project>

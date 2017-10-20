@@ -5,6 +5,7 @@ import com.miniHr.entity.Company;
 import com.miniHr.entity.User;
 import com.miniHr.service.CompanyService;
 import com.miniHr.service.UserService;
+import com.miniHr.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -49,7 +50,9 @@ public class ResumeQueryController {
      */
     @RequestMapping(value = "/queryAll")
     public String queryAllResumeWithPhone(Map<String, Object> res) {
-        res.put("resumes", userService.findAllUser());
+        List<User> list = userService.findAllUser();
+        res.put("resumes", list);
+        res.put("count", list.size());
         return "AllResumesZhiCheng";
     }
 
@@ -68,9 +71,41 @@ public class ResumeQueryController {
             return "error";
         } else {
             res.put("resumes", companyService.findUserByResume(c));
-            res.put("authCode",authCode);
-            res.put("companyName",c.getCompanyName());
+            res.put("authCode", authCode);
+            res.put("companyName", c.getCompanyName());
             return "ResumesOfCompany";
+        }
+    }
+
+    @RequestMapping(value = "/select")
+    public String selectResumes(String begin, String end, Map<String, Object> res) {
+        if (StringUtil.isEmpty(begin) || StringUtil.isEmpty(end)) {
+            return "redirect:/resumeInfo/queryAll";
+        } else {
+            List<User> list = userService.findUserByDate(begin, end);
+            res.put("resumes", list);
+            res.put("count", list.size());
+            res.put("begin", begin);
+            res.put("end", end);
+            return "AllResumesZhiCheng";
+        }
+    }
+
+    @RequestMapping(value = "/delete")
+    public String deleteResumes(String begin, String end, Map<String, Object> res) {
+        try {
+            if (StringUtil.isEmpty(begin) || StringUtil.isEmpty(end)) {
+                res.put(VariableKey.RETDATA, "没有需要删除的简历");
+                return "error";
+            } else if (1 == userService.deleteUserByDate(begin, end)) {
+                return "redirect:/resumeInfo/select?begin=" + begin + "&end=" + end;
+            } else {
+                res.put(VariableKey.RETDATA, "没有需要删除的简历");
+                return "error";
+            }
+        } catch (Exception e) {
+            res.put(VariableKey.RETDATA, "没有需要删除的简历");
+            return "error";
         }
     }
 

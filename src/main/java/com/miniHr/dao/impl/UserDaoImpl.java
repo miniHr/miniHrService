@@ -1,6 +1,8 @@
 package com.miniHr.dao.impl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
@@ -58,8 +60,23 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public List<User> findAllUser() {
-        String sql = "SELECT * FROM USER_INFO";
+        String sql = "SELECT * FROM USER_INFO ORDER BY ID DESC";
         return template.query(sql, CustomerRowMapper.newInstance(User.class));
+    }
+
+    @Override
+    public List<User> findUserByDate(String begin, String end) {
+        String sql = "SELECT * FROM USER_INFO WHERE create_dt>='" + begin + "' and create_dt<'" + end + "'";
+        return template.query(sql, CustomerRowMapper.newInstance(User.class));
+    }
+
+    @Override
+    public int deleteUserByDate(String begin, String end) {
+        String sql = "DELETE FROM USER_INFO WHERE create_dt>=:begin and create_dt<:end";
+        Map<String, String> map = new HashMap<String, String>();
+        map.put("begin", begin);
+        map.put("end", end);
+        return template.update(sql, map);
     }
 
     @Override
