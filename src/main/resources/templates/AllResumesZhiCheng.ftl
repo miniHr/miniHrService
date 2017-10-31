@@ -36,9 +36,11 @@
         };
 
         function deleteResumes() {
-            var begin = $("#begin").val();
-            var end = $("#end").val();
-            window.location.href = 'delete?begin=' + begin + "&end=" + end;
+            if (confirm("您确认删除吗？")) {
+                var begin = $("#begin").val();
+                var end = $("#end").val();
+                window.location.href = 'delete?begin=' + begin + "&end=" + end;
+            }
         };
 
         function exportResumes() {

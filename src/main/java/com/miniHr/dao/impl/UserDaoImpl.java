@@ -66,7 +66,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public List<User> findUserByDate(String begin, String end) {
-        String sql = "SELECT * FROM USER_INFO WHERE create_dt>='" + begin + "' and create_dt<'" + end + "'";
+        String sql = "SELECT * FROM USER_INFO WHERE create_dt>='" + begin + "' and create_dt<'" + end + "' ORDER BY ID DESC";
         return template.query(sql, CustomerRowMapper.newInstance(User.class));
     }
 
