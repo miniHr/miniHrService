@@ -17,7 +17,9 @@ public class BoothServiceImpl implements BoothService {
     @Autowired
     private BoothDao boothDao;
 
-    /** 查询所有展位信息 */
+    /**
+     * 查询所有展位信息
+     */
     @Override
     public List<Booth> getAllBooth() {
         return boothDao.queryAllBooth();
@@ -48,5 +50,15 @@ public class BoothServiceImpl implements BoothService {
     @Override
     public List<BoothExt> getAllBoothWithCompanyName() {
         return boothDao.getAllBoothWithCompanyName();
+    }
+
+    @Override
+    public List<BoothExt> getAllBoothWithCompanyNameByPage(Integer pageNum) {
+        return boothDao.getAllBoothWithCompanyNameByPage(pageNum);
+    }
+
+    @Override
+    public int getAllBoothInfoCount() {
+        return boothDao.getAllBoothInfoCount();
     }
 }

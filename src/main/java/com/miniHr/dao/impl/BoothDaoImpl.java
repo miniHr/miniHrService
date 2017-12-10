@@ -20,6 +20,14 @@ public class BoothDaoImpl implements BoothDao {
     @Autowired
     private NamedParameterJdbcTemplate template;
 
+    public NamedParameterJdbcTemplate getTemplate() {
+        return template;
+    }
+
+    public void setTemplate(NamedParameterJdbcTemplate template) {
+        this.template = template;
+    }
+
     @Override
     public List<Booth> queryAllBooth() {
         String sql = "SELECT * FROM BOOTH_INFO";
@@ -28,7 +36,7 @@ public class BoothDaoImpl implements BoothDao {
 
     @Override
     public int updateBoothInfo(Booth booth) {
-        String sql = "UPDATE BOOTH_INFO SET STATE=:state,COMPANY_ID=:companyId where ID=:id";
+        String sql = "UPDATE BOOTH_INFO SET STATE=:state,COMPANY_ID=:companyId WHERE ID=:id";
         return template.update(sql, new BeanPropertySqlParameterSource(booth));
     }
 
@@ -40,17 +48,9 @@ public class BoothDaoImpl implements BoothDao {
         return template.query(sql, paramMap, CustomerRowMapper.newInstance(Booth.class));
     }
 
-    public NamedParameterJdbcTemplate getTemplate() {
-        return template;
-    }
-
-    public void setTemplate(NamedParameterJdbcTemplate template) {
-        this.template = template;
-    }
-
     @Override
     public int updateBoothInfoWithState(BoothVo vo) {
-        String sql = "UPDATE BOOTH_INFO SET STATE=:state,COMPANY_ID=:companyId,update_dt=current_timestamp where ID=:id AND STATE=:oriState";
+        String sql = "UPDATE BOOTH_INFO SET STATE=:state,COMPANY_ID=:companyId,update_dt=current_timestamp WHERE ID=:id AND STATE=:oriState";
         return template.update(sql, new BeanPropertySqlParameterSource(vo));
     }
 
@@ -58,12 +58,25 @@ public class BoothDaoImpl implements BoothDao {
     public List<Booth> getBoothInfoByStateAndId(Booth booth) {
         String sql = "SELECT * FROM BOOTH_INFO WHERE STATE=:state AND COMPANY_ID=:companyId AND ID=:Id";
         return template.query(sql, new BeanPropertySqlParameterSource(booth),
-            CustomerRowMapper.newInstance(Booth.class));
+                CustomerRowMapper.newInstance(Booth.class));
     }
 
     @Override
     public List<BoothExt> getAllBoothWithCompanyName() {
         String sql = "SELECT b.*,c.COMPANY_NAME,c.name,c.phone,c.AUTH_CODE FROM BOOTH_INFO b LEFT JOIN COMPANY_INFO c ON b.COMPANY_ID=c.ID";
         return template.query(sql, CustomerRowMapper.newInstance(BoothExt.class));
+    }
+
+    @Override
+    public List<BoothExt> getAllBoothWithCompanyNameByPage(Integer pageNum) {
+        String sql = "SELECT b.*,c.COMPANY_NAME,c.name,c.phone,c.AUTH_CODE FROM BOOTH_INFO b LEFT JOIN COMPANY_INFO c ON b.COMPANY_ID=c.ID LIMIT " + pageNum + ",20";
+        return template.query(sql, CustomerRowMapper.newInstance(BoothExt.class));
+    }
+
+    @Override
+    public int getAllBoothInfoCount() {
+        String sql = "SELECT COUNT(id) FROM BOOTH_INFO";
+        Map<String, String> map = new HashMap<String, String>();
+        return template.queryForObject(sql, map, Integer.class);
     }
 }
