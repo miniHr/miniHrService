@@ -69,7 +69,7 @@ public class BoothDaoImpl implements BoothDao {
 
     @Override
     public List<BoothExt> getAllBoothWithCompanyNameByPage(Integer pageNum) {
-        String sql = "SELECT b.*,c.COMPANY_NAME,c.name,c.phone,c.AUTH_CODE FROM BOOTH_INFO b LEFT JOIN COMPANY_INFO c ON b.COMPANY_ID=c.ID LIMIT " + pageNum + ",20";
+        String sql = "SELECT b.*,c.COMPANY_NAME,c.name,c.phone,c.AUTH_CODE FROM BOOTH_INFO b LEFT JOIN COMPANY_INFO c ON b.COMPANY_ID=c.ID LIMIT " + pageNum + ",30";
         return template.query(sql, CustomerRowMapper.newInstance(BoothExt.class));
     }
 

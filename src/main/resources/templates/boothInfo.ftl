@@ -3,6 +3,7 @@
 <head>
     <meta charset="utf-8">
     <title>展位信息</title>
+    <link href="/css/page.css" type="text/css" rel="stylesheet"/>
     <style>
         .btn {
             width: 50px;
@@ -36,11 +37,13 @@
             height: 50px;
         }
     </style>
-    <script src="/js/jquery-3.2.1.min.js"></script>
     <script type="text/javascript">
+        function nextData(pageNum) {
+            window.location.href = "boothInfo?pageNum=" + pageNum + "&count=" +${dataCount};
+        }
     </script>
 </head>
-<body>
+<body style="text-align:center">
 <div class="d1">
     <h1>微信小程序智诚工作人员专用页面</h1>
 </div>
@@ -56,8 +59,6 @@
     查看招聘会场内全部入场简历（有电话号码，自己使用，不可泄露）
     <br/><a href="https://561job.cn/resumeInfo/queryAll">https://561job.cn/resumeInfo/queryAll</a>
 </div>
-<input id="count" value="${dataCount}" type="hidden"/>
-<input id="currentPage" value="${currentPage}" type="hidden"/>
 <br/>
 <table style="text-align: center; font-size: 11pt; width: 1000px; font-family: 宋体; border-collapse: collapse"
        borderColor=#3399ff cellSpacing=0 cellPadding=0 align=center border=1>
@@ -91,6 +92,7 @@
     </tr>
 </#list>
 </table>
-<div id="box" class="M-box" style="text-align: center"></div>
+<#import "pluginsFtl/page.ftl" as page>
+<@page.page pageNo='${currentPage?c}' totalPage='${(dataCount/30)?ceiling}' showPages=6 callFunName="nextData"/>
 </body>
 </html>

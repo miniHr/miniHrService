@@ -46,9 +46,9 @@ public class ZhiChengController {
         }
         int pageCondition = 0;
         if (null != pageNum) {
-            pageCondition = pageNum * 20;
+            pageCondition = (pageNum - 1) * 30;
         } else {
-            pageNum = 0;
+            pageNum = 1;
         }
         res.put("boothInfos", boothService.getAllBoothWithCompanyNameByPage(pageCondition));
         res.put("dataCount", count);
