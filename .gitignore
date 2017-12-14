@@ -26,3 +26,4 @@ nbdist/
 ### properties ###
 application.properties
 logback.xml
+*.pfx
