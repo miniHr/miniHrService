@@ -28,7 +28,7 @@ public class ReadFileTest {
         Row row = null;
         for (int i = 1; i < sheet.getPhysicalNumberOfRows(); i++) {
             StringBuilder sb2 = new StringBuilder(
-                "insert into COMPANY_INFO(id,booth_id,COMPANY_NAME,information,SCALE,ADDRESS,WELFARE,NAME,PHONE,IMAGE) values(");
+                "insert into COMPANY_INFO(id,booth_id,COMPANY_NAME,information,SCALE,ADDRESS,WELFARE,NAME,PHONE,IMAGE,AUTH_CODE) values(");
             if ((row = sheet.getRow(i)) != null) {
                 for (int j = 0; j < 10; j++) {
                     String value = null;
@@ -54,7 +54,7 @@ public class ReadFileTest {
                     }
                 }
                 sb2.setLength(sb2.length() - 1);
-                sb2.append(");").append(System.getProperty("line.separator"));
+                sb2.append(",CEILING(RAND()*500000+500000));").append(System.getProperty("line.separator"));
                 sb.append(sb2);
             }
         }
